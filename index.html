@@ -2986,6 +2986,10 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
     let isCloudConnected = false;
 
+    let autoRetryTimer = null;
+
+    let autoRetryCount = 0;
+
     let allRecords = [];
 
     let systemState = null;
@@ -4363,6 +4367,8 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
             console.warn('⚠️ 云端未连接，使用本地普通成员池:', normal);
 
+            scheduleAutoReconnect();
+
         }
 
         // v2.1.9 修复：supabase-js 查询出错不抛异常只返回 error 对象，需读取 error 判断
@@ -4459,7 +4465,50 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
 
 
+    // 连接失败后自动重试：每 5 秒一次，最多 12 次（约 1 分钟），覆盖手机首次 DNS 解析慢/网络未就绪场景
+    function scheduleAutoReconnect() {
+
+        if (autoRetryTimer || isCloudConnected) return;
+
+        autoRetryCount = 0;
+
+        const attempt = async () => {
+
+            if (isCloudConnected) { autoRetryTimer = null; return; }
+
+            autoRetryCount++;
+
+            const ok = await connectSupabase();
+
+            if (ok) {
+
+                autoRetryTimer = null;
+
+                await loadAllData();
+
+                renderAll();
+
+                showToast('✅ 已自动连接云端，数据已同步');
+
+            } else if (autoRetryCount < 12) {
+
+                autoRetryTimer = setTimeout(attempt, 5000);
+
+            } else {
+
+                autoRetryTimer = null;
+
+            }
+
+        };
+
+        autoRetryTimer = setTimeout(attempt, 5000);
+
+    }
+
     async function manualReconnect() {
+
+        if (autoRetryTimer) { clearTimeout(autoRetryTimer); autoRetryTimer = null; }
 
         showToast('🔄 正在尝试连接云端...');
 
