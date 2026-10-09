@@ -2164,6 +2164,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
                 <button class="btn btn-sm btn-outline" onclick="openHolidayManage()" style="font-size:11px;padding:3px 8px;">📅 管理节假日</button>
                 <button class="btn btn-sm btn-outline" onclick="openUserGuide()" style="font-size:11px;padding:3px 8px;">📖 使用说明</button>
                 <button class="btn btn-sm btn-outline" id="workPresetManageBtn" onclick="openWorkPresetManage()" style="display:none;font-size:11px;padding:3px 8px;">🏷️ 标签管理</button>
+                <button class="btn btn-sm btn-outline" id="fixedUserManageBtn" onclick="openFixedUserManage()" style="display:none;font-size:11px;padding:3px 8px;">👥 固定人员</button>
             </div>
         </div>
         <div id="holidayTip"></div>
@@ -2190,16 +2191,6 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             </div>
             <div id="userListBox" class="user-list"></div>
             <div class="text-muted mt-8" style="font-size:13px;"></div>
-            <!-- v2.2.0：固定人员管理区块（仅管理员可见，登录成功后按 isWorkAdmin() 显示；嵌入人员管理卡片内，不占独立方框） -->
-            <div id="fixedUserCard" style="display:none;border-top:1px dashed #e2e8f0;margin-top:12px;padding-top:12px;">
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><b style="font-size:13px;">👥 固定人员</b><span class="badge" id="fixedUserCountBadge">0 人</span></div>
-                <div id="fixedUserListBox" class="user-list"></div>
-                <div class="row-row" style="margin-top:8px;">
-                    <input type="text" id="newFixedUserName" placeholder="输入固定人员姓名" />
-                    <button class="btn btn-primary" onclick="addFixedUser()">➕ 添加</button>
-                </div>
-                <div class="text-muted mt-8" style="font-size:12px;">固定人员显示在打卡下拉首位，增删保存云端后全员自动同步</div>
-            </div>
         </div>
         <div class="card" id="formCard"><h3>✏️ 下乡打卡</h3>
             <div class="row"><label>下乡人员</label><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;width:100%;"><select id="user" style="flex:1;min-width:120px;"></select><button class="btn btn-sm btn-outline" id="copyLastBtn" onclick="copyLastRecord()" style="white-space:nowrap;font-size:12px;padding:6px 10px;">📝 复制上一次下乡</button></div></div>
@@ -2355,6 +2346,25 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             <div style="display:flex;gap:8px;">
                 <button class="btn btn-primary" onclick="saveWorkPresets()" style="flex:1;">💾 保存到云端</button>
                 <button class="btn btn-outline" onclick="closeWorkPresetManage()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== v2.2.0 固定人员管理模态框（对齐标签管理弹窗样式） ===== -->
+    <div class="modal-mask" id="fixedUserManageModal">
+        <div class="modal-box" style="max-width:480px;">
+            <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <h3 style="margin:0;">👥 固定人员管理</h3>
+                <button onclick="closeFixedUserManage()" style="background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1;padding:4px;">✕</button>
+            </div>
+            <p style="font-size:13px;color:#64748b;margin-bottom:12px;">固定人员显示在打卡下拉首位；名单保存在云端，增删后全员刷新页面自动同步</p>
+            <div id="fixedUserManageList" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
+            <div style="display:flex;gap:8px;margin-bottom:12px;">
+                <input type="text" id="newFixedUserName" placeholder="输入固定人员姓名" style="flex:1;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;" />
+                <button class="btn btn-primary" onclick="addFixedUser()">添加</button>
+            </div>
+            <div style="display:flex;gap:8px;">
+                <button class="btn btn-outline" onclick="closeFixedUserManage()" style="flex:1;">关闭</button>
             </div>
         </div>
     </div>
@@ -3604,10 +3614,10 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
         if (_wpBtn) _wpBtn.style.display = (typeof isWorkAdmin === 'function' && isWorkAdmin()) ? '' : 'none';
 
-        // v2.2.0：固定人员管理区块仅 super_admin + 覃祖健可见（入口隐藏 + 函数内身份校验双重防线；嵌入人员管理卡片内）
-        const _fuCard = document.getElementById('fixedUserCard');
+        // v2.2.0：固定人员管理按钮仅 super_admin + 覃祖健可见（与标签管理按钮同模式；入口隐藏 + 函数内身份校验双重防线）
+        const _fuBtn = document.getElementById('fixedUserManageBtn');
 
-        if (_fuCard) _fuCard.style.display = (typeof isWorkAdmin === 'function' && isWorkAdmin()) ? '' : 'none';
+        if (_fuBtn) _fuBtn.style.display = (typeof isWorkAdmin === 'function' && isWorkAdmin()) ? '' : 'none';
 
         // v2.1.9：登录成功后拉取云端历史标签删除名单并合并
         if (typeof loadDeletedWorksFromCloud === 'function') {
@@ -7064,25 +7074,27 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
     // ======================== v2.2.0 固定人员管理（仅管理员） ========================
 
-    // v2.2.0：渲染固定人员管理卡片列表（复用 user-tag/del-btn 样式）
+    // v2.2.0：固定人员管理弹窗（对齐标签管理 openWorkPresetManage 模式）
+    function openFixedUserManage() {
+        if (!isWorkAdmin()) { alert('权限不足，仅管理员可操作'); return; }
+        renderFixedUserManageList();
+        document.getElementById('fixedUserManageModal').classList.add('active');
+    }
+
+    function closeFixedUserManage() {
+        document.getElementById('fixedUserManageModal').classList.remove('active');
+    }
+
+    // v2.2.0：渲染固定人员管理弹窗列表（对齐标签管理弹窗样式）
     function renderFixedUserManageList() {
-        const box = document.getElementById('fixedUserListBox');
-        const badge = document.getElementById('fixedUserCountBadge');
-        if (badge) badge.textContent = CONFIG.FIXED_USERS.length + ' 人';
+        const box = document.getElementById('fixedUserManageList');
         if (!box) return;
-        box.innerHTML = '';
-        CONFIG.FIXED_USERS.forEach(name => {
-            const span = document.createElement('span');
-            span.className = 'user-tag';
-            const delBtn = document.createElement('span');
-            delBtn.className = 'del-btn';
-            delBtn.textContent = '×';
-            delBtn.title = '删除';
-            delBtn.onclick = () => removeFixedUser(name);
-            span.innerHTML = name + ' ';
-            span.appendChild(delBtn);
-            box.appendChild(span);
-        });
+        box.innerHTML = CONFIG.FIXED_USERS.map((name, i) =>
+            `<div style="display:flex;align-items:center;gap:8px;padding:8px;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;">
+                <span style="flex:1;font-size:14px;">👤 ${name}</span>
+                <button class="btn btn-sm btn-danger" onclick="removeFixedUser('${name}')" style="padding:2px 8px;font-size:12px;">删除</button>
+            </div>`
+        ).join('');
     }
 
     // v2.2.0：保存固定人员名单到云端 config 表（key=fixed_users），成功后刷新人员池与界面
@@ -10327,6 +10339,15 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     window.removeWorkPreset = removeWorkPreset;
 
     window.saveWorkPresets = saveWorkPresets;
+
+    // v2.2.0：固定人员管理相关函数暴露（与标签管理导出风格保持一致）
+    window.openFixedUserManage = openFixedUserManage;
+
+    window.closeFixedUserManage = closeFixedUserManage;
+
+    window.addFixedUser = addFixedUser;
+
+    window.removeFixedUser = removeFixedUser;
 
     // ★★★ 新增：统计月份变化暴露 ★★★
     window.onStatsMonthChange = onStatsMonthChange;
