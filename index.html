@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>公卫科下乡打卡 v2.1.9.1</title>
+    <title>公卫科下乡打卡 v2.2.0</title>
     <script>
 /* ===== 内联 supabase-js 2.117.2（原 CDN: https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2，2026-09-30 因 jsdelivr 不可靠改为内联）===== */
 var supabase=(function(e){function t(e,t){var n={};for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&t.indexOf(r)<0&&(n[r]=e[r]);if(e!=null&&typeof Object.getOwnPropertySymbols==`function`)for(var i=0,r=Object.getOwnPropertySymbols(e);i<r.length;i++)t.indexOf(r[i])<0&&Object.prototype.propertyIsEnumerable.call(e,r[i])&&(n[r[i]]=e[r[i]]);return n}function n(e,t,n,r){function i(e){return e instanceof n?e:new n(function(t){t(e)})}return new(n||=Promise)(function(n,a){function o(e){try{c(r.next(e))}catch(e){a(e)}}function s(e){try{c(r.throw(e))}catch(e){a(e)}}function c(e){e.done?n(e.value):i(e.value).then(o,s)}c((r=r.apply(e,t||[])).next())})}let r=e=>e?(...t)=>e(...t):(...e)=>fetch(...e);var i=class extends Error{constructor(e,t=`FunctionsError`,n){super(e),this.name=t,this.context=n}toJSON(){return{name:this.name,message:this.message,context:this.context}}},a=class extends i{constructor(e){super(`Failed to send a request to the Edge Function`,`FunctionsFetchError`,e)}},o=class extends i{constructor(e){super(`Relay Error invoking the Edge Function`,`FunctionsRelayError`,e)}},s=class extends i{constructor(e){super(`Edge Function returned a non-2xx status code`,`FunctionsHttpError`,e)}},c;(function(e){e.Any=`any`,e.ApNortheast1=`ap-northeast-1`,e.ApNortheast2=`ap-northeast-2`,e.ApSouth1=`ap-south-1`,e.ApSoutheast1=`ap-southeast-1`,e.ApSoutheast2=`ap-southeast-2`,e.CaCentral1=`ca-central-1`,e.EuCentral1=`eu-central-1`,e.EuWest1=`eu-west-1`,e.EuWest2=`eu-west-2`,e.EuWest3=`eu-west-3`,e.SaEast1=`sa-east-1`,e.UsEast1=`us-east-1`,e.UsWest1=`us-west-1`,e.UsWest2=`us-west-2`})(c||={});var l=class{constructor(e,{headers:t={},customFetch:n,region:i=c.Any}={}){this.url=e,this.headers=t,this.region=i,this.fetch=r(n)}setAuth(e){this.headers.Authorization=`Bearer ${e}`}invoke(e){return n(this,arguments,void 0,function*(e,t={}){var n;let r,i,c;try{let{headers:n,method:l,body:u,signal:d,timeout:f}=t,p={},{region:m}=t;m||=this.region;let h=new URL(`${this.url}/${e}`);m&&m!==`any`&&(p[`x-region`]=m,h.searchParams.set(`forceFunctionRegion`,m));let g,ee=!!n&&Object.keys(n).some(e=>e.toLowerCase()===`content-type`);u&&!ee?typeof Blob<`u`&&u instanceof Blob||u instanceof ArrayBuffer?(p[`Content-Type`]=`application/octet-stream`,g=u):typeof u==`string`?(p[`Content-Type`]=`text/plain`,g=u):typeof FormData<`u`&&u instanceof FormData?g=u:(p[`Content-Type`]=`application/json`,g=JSON.stringify(u)):g=u&&typeof u!=`string`&&!(typeof Blob<`u`&&u instanceof Blob)&&!(u instanceof ArrayBuffer)&&!(typeof FormData<`u`&&u instanceof FormData)?JSON.stringify(u):u;let te=d;f&&(i=new AbortController,r=setTimeout(()=>i.abort(),f),d?(te=i.signal,c=()=>i.abort(),d.addEventListener(`abort`,c)):te=i.signal);let _=yield this.fetch(h.toString(),{method:l||`POST`,headers:Object.assign(Object.assign(Object.assign({},p),this.headers),n),body:g,signal:te}).catch(e=>{throw new a(e)}),ne=_.headers.get(`x-relay-error`);if(ne&&ne===`true`)throw new o(_);if(!_.ok)throw new s(_);let re=(_.headers.get(`Content-Type`)??`text/plain`).split(`;`)[0].trim().toLowerCase(),ie;return ie=re===`application/json`?yield _.json():re===`application/octet-stream`||re===`application/pdf`?yield _.blob():re===`text/event-stream`?_:re===`multipart/form-data`?yield _.formData():yield _.text(),{data:ie,error:null,response:_}}catch(e){return{data:null,error:e,response:e instanceof s||e instanceof o?e.context:void 0}}finally{r&&clearTimeout(r),c&&((n=t.signal)==null||n.removeEventListener(`abort`,c))}})}},u=class extends Error{constructor(e){super(e.message),this.name=`PostgrestError`,this.details=e.details,this.hint=e.hint,this.code=e.code}toJSON(){return{name:this.name,message:this.message,details:this.details,hint:this.hint,code:this.code}}};let d=e=>Math.min(1e3*2**e,3e4),f=[520,503],p=[`GET`,`HEAD`,`OPTIONS`];function m(e){"@babel/helpers - typeof";return m=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},m(e)}function h(e,t){if(m(e)!=`object`||!e)return e;var n=e[Symbol.toPrimitive];if(n!==void 0){var r=n.call(e,t||`default`);if(m(r)!=`object`)return r;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(t===`string`?String:Number)(e)}function g(e){var t=h(e,`string`);return m(t)==`symbol`?t:t+``}function ee(e,t,n){return(t=g(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function te(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),n.push.apply(n,r)}return n}function _(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]==null?{}:arguments[t];t%2?te(Object(n),!0).forEach(function(t){ee(e,t,n[t])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):te(Object(n)).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))})}return e}function ne(e,t){return new Promise(n=>{if(t?.aborted){n();return}let r=setTimeout(()=>{t?.removeEventListener(`abort`,i),n()},e);function i(){clearTimeout(r),n()}t?.addEventListener(`abort`,i)})}function re(e,t,n,r){return!(!r||n>=3||!p.includes(e)||!f.includes(t))}async function ie(e,t,n,r){let i=0;for(;;){let a=_({},n.headers);i>0&&(a[`X-Retry-Count`]=String(i));let o;try{o=await e(t,{method:n.method,headers:a,body:n.body,signal:n.signal})}catch(e){if(e?.name===`AbortError`||e?.code===`ABORT_ERR`||!p.includes(n.method))throw e;if(r&&i<3){let e=d(i);i++,await ne(e,n.signal);continue}throw e}if(re(n.method,o.status,i,r)){let e=o.headers?.get(`Retry-After`)??null,t=e===null?d(i):Math.max(0,parseInt(e,10)||0)*1e3;await o.text(),i++,await ne(t,n.signal);continue}return o}}var ae=class{constructor(e){this.shouldThrowOnError=!1,this.retryEnabled=!0,this.method=e.method,this.url=e.url,this.headers=new Headers(e.headers),this.schema=e.schema,this.body=e.body,this.shouldThrowOnError=e.shouldThrowOnError??!1,this.signal=e.signal,this.isMaybeSingle=e.isMaybeSingle??!1,this.shouldStripNulls=e.shouldStripNulls??!1,this.urlLengthLimit=e.urlLengthLimit??8e3,this.retryEnabled=e.retry??!0,e.fetch?this.fetch=e.fetch:this.fetch=fetch}throwOnError(){return this.shouldThrowOnError=!0,this}stripNulls(){if(this.headers.get(`Accept`)===`text/csv`)throw Error(`stripNulls() cannot be used with csv()`);return this.shouldStripNulls=!0,this}setHeader(e,t){return this.headers=new Headers(this.headers),this.headers.set(e,t),this}retry(e){return this.retryEnabled=e,this}then(e,t){var n=this;if(this.schema===void 0||([`GET`,`HEAD`].includes(this.method)?this.headers.set(`Accept-Profile`,this.schema):this.headers.set(`Content-Profile`,this.schema)),this.method!==`GET`&&this.method!==`HEAD`&&this.headers.set(`Content-Type`,`application/json`),this.shouldStripNulls){let e=this.headers.get(`Accept`);e===`application/vnd.pgrst.object+json`?this.headers.set(`Accept`,`application/vnd.pgrst.object+json;nulls=stripped`):(!e||e===`application/json`)&&this.headers.set(`Accept`,`application/vnd.pgrst.array+json;nulls=stripped`)}let r=this.fetch,i=(async()=>{let e={};n.headers.forEach((t,n)=>{e[n]=t});let t=await ie(r,n.url.toString(),{method:n.method,headers:e,body:JSON.stringify(n.body,(e,t)=>typeof t==`bigint`?t.toString():t),signal:n.signal},n.retryEnabled);return await n.processResponse(t)})();return this.shouldThrowOnError||(i=i.catch(e=>{let t=``,n=``,r=``,i=e?.cause;if(i){let n=i?.message??``,r=i?.code??``;t=`${e?.name??`FetchError`}: ${e?.message}`,t+=`\n\nCaused by: ${i?.name??`Error`}: ${n}`,r&&(t+=` (${r})`),i?.stack&&(t+=`\n${i.stack}`)}else t=e?.stack??``;let a=this.url.toString().length;return e?.name===`AbortError`||e?.code===`ABORT_ERR`?(r=``,n=`Request was aborted (timeout or manual cancellation)`,a>this.urlLengthLimit&&(n+=`. Note: Your request URL is ${a} characters, which may exceed server limits. If selecting many fields, consider using views. If filtering with large arrays (e.g., .in('id', [many IDs])), consider using an RPC function to pass values server-side.`)):(i?.name===`HeadersOverflowError`||i?.code===`UND_ERR_HEADERS_OVERFLOW`)&&(r=``,n=`HTTP headers exceeded server limits (typically 16KB)`,a>this.urlLengthLimit&&(n+=`. Your request URL is ${a} characters. If selecting many fields, consider using views. If filtering with large arrays (e.g., .in('id', [200+ IDs])), consider using an RPC function instead.`)),{success:!1,error:{message:`${e?.name??`FetchError`}: ${e?.message}`,details:t,hint:n,code:r},data:null,count:null,status:0,statusText:``}})),i.then(e,t)}async processResponse(e){var t=this;let n=null,r=null,i=null,a=e.status,o=e.statusText;if(e.ok){if(t.method!==`HEAD`){let i=await e.text();if(i!==``)if(t.headers.get(`Accept`)===`text/csv`)r=i;else if(t.headers.get(`Accept`)&&t.headers.get(`Accept`)?.includes(`application/vnd.pgrst.plan+text`))r=i;else try{r=JSON.parse(i)}catch{if(n={message:i},r=null,t.shouldThrowOnError)throw new u({message:i,details:``,hint:``,code:``})}}let s=t.headers.get(`Prefer`)?.match(/count=(exact|planned|estimated)/),c=e.headers.get(`content-range`)?.split(`/`);if(s&&c&&c.length>1&&(i=parseInt(c[1])),t.isMaybeSingle&&Array.isArray(r))if(r.length>1){if(n={code:`PGRST116`,details:`Results contain ${r.length} rows, application/vnd.pgrst.object+json requires 1 row`,hint:null,message:`JSON object requested, multiple (or no) rows returned`},r=null,i=null,a=406,o=`Not Acceptable`,t.shouldThrowOnError)throw new u(_(_({},n),{},{hint:n.hint??``}))}else r=r.length===1?r[0]:null}else{let i=await e.text();try{n=JSON.parse(i),Array.isArray(n)&&e.status===404&&(r=[],n=null,a=200,o=`OK`)}catch{e.status===404&&i===``?(a=204,o=`No Content`):n={message:i}}if(n&&t.shouldThrowOnError)throw new u(n)}return{success:n===null,error:n,data:r,count:i,status:a,statusText:o}}returns(){return this}overrideTypes(){return this}},oe=class extends ae{throwOnError(){return super.throwOnError()}select(e){let t=!1,n=(e??`*`).split(``).map(e=>/\s/.test(e)&&!t?``:(e===`"`&&(t=!t),e)).join(``);return this.url.searchParams.set(`select`,n),this.headers.append(`Prefer`,`return=representation`),this}order(e,{ascending:t=!0,nullsFirst:n,foreignTable:r,referencedTable:i=r}={}){let a=i?`${i}.order`:`order`,o=this.url.searchParams.get(a);return this.url.searchParams.set(a,`${o?`${o},`:``}${e}.${t?`asc`:`desc`}${n===void 0?``:n?`.nullsfirst`:`.nullslast`}`),this}limit(e,{foreignTable:t,referencedTable:n=t}={}){let r=n===void 0?`limit`:`${n}.limit`;return this.url.searchParams.set(r,`${e}`),this}range(e,t,{foreignTable:n,referencedTable:r=n}={}){let i=r===void 0?`offset`:`${r}.offset`,a=r===void 0?`limit`:`${r}.limit`;return this.url.searchParams.set(i,`${e}`),this.url.searchParams.set(a,`${t-e+1}`),this}abortSignal(e){return this.signal=e,this}single(){return this.headers.set(`Accept`,`application/vnd.pgrst.object+json`),this}maybeSingle(){return this.isMaybeSingle=!0,this}csv(){return this.headers.set(`Accept`,`text/csv`),this}geojson(){return this.headers.set(`Accept`,`application/geo+json`),this}explain({analyze:e=!1,verbose:t=!1,settings:n=!1,buffers:r=!1,wal:i=!1,format:a=`text`}={}){let o=[e?`analyze`:null,t?`verbose`:null,n?`settings`:null,r?`buffers`:null,i?`wal`:null].filter(Boolean).join(`|`),s=this.headers.get(`Accept`)??`application/json`;return this.headers.set(`Accept`,`application/vnd.pgrst.plan+${a}; for="${s}"; options=${o};`),this}rollback(){return this.headers.append(`Prefer`,`tx=rollback`),this}returns(){return this}maxAffected(e){return this.headers.append(`Prefer`,`handling=strict`),this.headers.append(`Prefer`,`max-affected=${e}`),this}};let se=RegExp(`[,()]`);var ce=class extends oe{throwOnError(){return super.throwOnError()}eq(e,t){return this.url.searchParams.append(e,`eq.${t}`),this}neq(e,t){return this.url.searchParams.append(e,`neq.${t}`),this}gt(e,t){return this.url.searchParams.append(e,`gt.${t}`),this}gte(e,t){return this.url.searchParams.append(e,`gte.${t}`),this}lt(e,t){return this.url.searchParams.append(e,`lt.${t}`),this}lte(e,t){return this.url.searchParams.append(e,`lte.${t}`),this}like(e,t){return this.url.searchParams.append(e,`like.${t}`),this}likeAllOf(e,t){return this.url.searchParams.append(e,`like(all).{${t.join(`,`)}}`),this}likeAnyOf(e,t){return this.url.searchParams.append(e,`like(any).{${t.join(`,`)}}`),this}ilike(e,t){return this.url.searchParams.append(e,`ilike.${t}`),this}ilikeAllOf(e,t){return this.url.searchParams.append(e,`ilike(all).{${t.join(`,`)}}`),this}ilikeAnyOf(e,t){return this.url.searchParams.append(e,`ilike(any).{${t.join(`,`)}}`),this}regexMatch(e,t){return this.url.searchParams.append(e,`match.${t}`),this}regexIMatch(e,t){return this.url.searchParams.append(e,`imatch.${t}`),this}is(e,t){return this.url.searchParams.append(e,`is.${t}`),this}isDistinct(e,t){return this.url.searchParams.append(e,`isdistinct.${t}`),this}in(e,t){let n=Array.from(new Set(t)).map(e=>typeof e==`string`&&se.test(e)?`"${e}"`:`${e}`).join(`,`);return this.url.searchParams.append(e,`in.(${n})`),this}notIn(e,t){let n=Array.from(new Set(t)).map(e=>typeof e==`string`&&se.test(e)?`"${e}"`:`${e}`).join(`,`);return this.url.searchParams.append(e,`not.in.(${n})`),this}contains(e,t){return typeof t==`string`?this.url.searchParams.append(e,`cs.${t}`):Array.isArray(t)?this.url.searchParams.append(e,`cs.{${t.join(`,`)}}`):this.url.searchParams.append(e,`cs.${JSON.stringify(t)}`),this}containedBy(e,t){return typeof t==`string`?this.url.searchParams.append(e,`cd.${t}`):Array.isArray(t)?this.url.searchParams.append(e,`cd.{${t.join(`,`)}}`):this.url.searchParams.append(e,`cd.${JSON.stringify(t)}`),this}rangeGt(e,t){return this.url.searchParams.append(e,`sr.${t}`),this}rangeGte(e,t){return this.url.searchParams.append(e,`nxl.${t}`),this}rangeLt(e,t){return this.url.searchParams.append(e,`sl.${t}`),this}rangeLte(e,t){return this.url.searchParams.append(e,`nxr.${t}`),this}rangeAdjacent(e,t){return this.url.searchParams.append(e,`adj.${t}`),this}overlaps(e,t){return typeof t==`string`?this.url.searchParams.append(e,`ov.${t}`):this.url.searchParams.append(e,`ov.{${t.join(`,`)}}`),this}textSearch(e,t,{config:n,type:r}={}){let i=``;r===`plain`?i=`pl`:r===`phrase`?i=`ph`:r===`websearch`&&(i=`w`);let a=n===void 0?``:`(${n})`;return this.url.searchParams.append(e,`${i}fts${a}.${t}`),this}match(e){return Object.entries(e).filter(([e,t])=>t!==void 0).forEach(([e,t])=>{this.url.searchParams.append(e,`eq.${t}`)}),this}not(e,t,n){return this.url.searchParams.append(e,`not.${t}.${n}`),this}or(e,{foreignTable:t,referencedTable:n=t}={}){let r=n?`${n}.or`:`or`;return this.url.searchParams.append(r,`(${e})`),this}filter(e,t,n){return this.url.searchParams.append(e,`${t}.${n}`),this}},le=class{constructor(e,{headers:t={},schema:n,fetch:r,urlLengthLimit:i=8e3,retry:a}){this.url=e,this.headers=new Headers(t),this.schema=n,this.fetch=r,this.urlLengthLimit=i,this.retry=a}cloneRequestState(){return{url:new URL(this.url.toString()),headers:new Headers(this.headers)}}select(e,t){let{head:n=!1,count:r}=t??{},i=n?`HEAD`:`GET`,a=!1,o=(e??`*`).split(``).map(e=>/\s/.test(e)&&!a?``:(e===`"`&&(a=!a),e)).join(``),{url:s,headers:c}=this.cloneRequestState();return s.searchParams.set(`select`,o),r&&c.append(`Prefer`,`count=${r}`),new ce({method:i,url:s,headers:c,schema:this.schema,fetch:this.fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}insert(e,{count:t,defaultToNull:n=!0}={}){let{url:r,headers:i}=this.cloneRequestState();if(t&&i.append(`Prefer`,`count=${t}`),n||i.append(`Prefer`,`missing=default`),Array.isArray(e)){let t=e.reduce((e,t)=>e.concat(Object.keys(t)),[]);if(t.length>0){let e=[...new Set(t)].map(e=>`"${e}"`);r.searchParams.set(`columns`,e.join(`,`))}}return new ce({method:`POST`,url:r,headers:i,schema:this.schema,body:e,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}upsert(e,{onConflict:t,ignoreDuplicates:n=!1,count:r,defaultToNull:i=!0}={}){let{url:a,headers:o}=this.cloneRequestState();if(o.append(`Prefer`,`resolution=${n?`ignore`:`merge`}-duplicates`),t!==void 0&&a.searchParams.set(`on_conflict`,t),r&&o.append(`Prefer`,`count=${r}`),i||o.append(`Prefer`,`missing=default`),Array.isArray(e)){let t=e.reduce((e,t)=>e.concat(Object.keys(t)),[]);if(t.length>0){let e=[...new Set(t)].map(e=>`"${e}"`);a.searchParams.set(`columns`,e.join(`,`))}}return new ce({method:`POST`,url:a,headers:o,schema:this.schema,body:e,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}update(e,{count:t}={}){let{url:n,headers:r}=this.cloneRequestState();return t&&r.append(`Prefer`,`count=${t}`),new ce({method:`PATCH`,url:n,headers:r,schema:this.schema,body:e,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}delete({count:e}={}){let{url:t,headers:n}=this.cloneRequestState();return e&&n.append(`Prefer`,`count=${e}`),new ce({method:`DELETE`,url:t,headers:n,schema:this.schema,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}};function ue(e,t){try{let t=JSON.parse(e);if(t&&typeof t==`object`&&!Array.isArray(t))return new u({message:String(t.message??e),details:t.details??``,hint:t.hint??``,code:t.code??``})}catch{}return new u({message:e||t,details:``,hint:``,code:``})}function de(e,t,n){let r=e;return{success:!1,error:new u({message:`${r?.name??`FetchError`}: ${r?.message}`,details:``,hint:``,code:``}),data:null,count:null,status:t,statusText:n}}var fe=class e{constructor(e,{headers:t={},schema:n,fetch:r,timeout:i,urlLengthLimit:a=8e3,retry:o}={}){this.url=e,this.headers=new Headers(t),this.schemaName=n,this.urlLengthLimit=a;let s=r??globalThis.fetch;i!==void 0&&i>0?this.fetch=(e,t)=>{let n=new AbortController,r=setTimeout(()=>n.abort(),i),a=t?.signal;if(a){if(a.aborted)return clearTimeout(r),s(e,t);let i=()=>{clearTimeout(r),n.abort()};return a.addEventListener(`abort`,i,{once:!0}),s(e,_(_({},t),{},{signal:n.signal})).finally(()=>{clearTimeout(r),a.removeEventListener(`abort`,i)})}return s(e,_(_({},t),{},{signal:n.signal})).finally(()=>clearTimeout(r))}:this.fetch=s,this.retry=o}from(e){if(!e||typeof e!=`string`||e.trim()===``)throw Error(`Invalid relation name: relation must be a non-empty string.`);return new le(new URL(`${this.url}/${e}`),{headers:new Headers(this.headers),schema:this.schemaName,fetch:this.fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}schema(t){return new e(this.url,{headers:this.headers,schema:t,fetch:this.fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}async getOpenApiSpec(){var e=this;let t=new Headers(e.headers);t.set(`Accept`,`application/openapi+json`),e.schemaName&&t.set(`Accept-Profile`,e.schemaName);let n={};t.forEach((e,t)=>{n[t]=e});let r=e.fetch??globalThis.fetch,i;try{i=await ie(r,`${e.url}/`,{method:`GET`,headers:n},e.retry??!0)}catch(e){return de(e,0,``)}let a;try{a=await i.text()}catch(e){return de(e,i.status,i.statusText)}if(i.ok)try{return{success:!0,error:null,data:JSON.parse(a),count:null,status:i.status,statusText:i.statusText}}catch{}return{success:!1,error:ue(a,i.statusText),data:null,count:null,status:i.status,statusText:i.statusText}}rpc(e,t={},{head:n=!1,get:r=!1,count:i}={}){let a,o=new URL(`${this.url}/rpc/${e}`),s,c=e=>typeof e==`object`&&!!e&&(!Array.isArray(e)||e.some(c)),l=n&&Object.values(t).some(c);l?(a=`POST`,s=t):n||r?(a=n?`HEAD`:`GET`,Object.entries(t).filter(([e,t])=>t!==void 0).map(([e,t])=>[e,Array.isArray(t)?`{${t.join(`,`)}}`:`${t}`]).forEach(([e,t])=>{o.searchParams.append(e,t)})):(a=`POST`,s=t);let u=new Headers(this.headers);return l?u.set(`Prefer`,i?`count=${i},return=minimal`:`return=minimal`):i&&u.set(`Prefer`,`count=${i}`),new ce({method:a,url:o,headers:u,schema:this.schemaName,body:s,fetch:this.fetch??fetch,urlLengthLimit:this.urlLengthLimit,retry:this.retry})}},pe=class{constructor(){}static detectEnvironment(){if(typeof WebSocket<`u`)return{type:`native`,wsConstructor:WebSocket};let e=globalThis;if(typeof globalThis<`u`&&e.WebSocket!==void 0)return{type:`native`,wsConstructor:e.WebSocket};let t=typeof global<`u`?global:void 0;if(t&&t.WebSocket!==void 0)return{type:`native`,wsConstructor:t.WebSocket};if(typeof globalThis<`u`&&e.WebSocketPair!==void 0&&globalThis.WebSocket===void 0)return{type:`cloudflare`,error:`Cloudflare Workers detected. WebSocket clients are not supported in Cloudflare Workers.`,workaround:`Use Cloudflare Workers WebSocket API for server-side WebSocket handling, or deploy to a different runtime.`};if(typeof globalThis<`u`&&e.EdgeRuntime||typeof navigator<`u`&&navigator.userAgent?.includes(`Vercel-Edge`))return{type:`unsupported`,error:`Edge runtime detected (Vercel Edge/Netlify Edge). WebSockets are not supported in edge functions.`,workaround:`Use serverless functions or a different deployment target for WebSocket functionality.`};let n=globalThis.process;if(n){let e=n.versions;if(e&&e.node)return{type:`unsupported`,error:`Node.js detected but native WebSocket not found.`,workaround:`Ensure you are running Node.js 22+ or provide a WebSocket implementation via the transport option.`}}return{type:`unsupported`,error:`Unknown JavaScript runtime without WebSocket support.`,workaround:`Ensure you're running in a supported environment (browser, Node.js, Deno) or provide a custom WebSocket implementation.`}}static getWebSocketConstructor(){let e=this.detectEnvironment();if(e.wsConstructor)return e.wsConstructor;let t=e.error||`WebSocket not supported in this environment.`;throw e.workaround&&(t+=`\n\nSuggested solution: ${e.workaround}`),Error(t)}static isWebSocketSupported(){try{return this.detectEnvironment().type===`native`}catch{return!1}}};let v={closed:`closed`,errored:`errored`,joined:`joined`,joining:`joining`,leaving:`leaving`},me={close:`phx_close`,error:`phx_error`,join:`phx_join`,reply:`phx_reply`,leave:`phx_leave`,access_token:`access_token`},he={connecting:`connecting`,open:`open`,closing:`closing`,closed:`closed`};var ge=class{constructor(e){this.HEADER_LENGTH=1,this.USER_BROADCAST_PUSH_META_LENGTH=6,this.KINDS={userBroadcastPush:3,userBroadcast:4},this.BINARY_ENCODING=0,this.JSON_ENCODING=1,this.BROADCAST_EVENT=`broadcast`,this.allowedMetadataKeys=[],this.allowedMetadataKeys=e??[]}encode(e,t){if(e.event===this.BROADCAST_EVENT&&!(e.payload instanceof ArrayBuffer)&&typeof e.payload.event==`string`)return t(this._binaryEncodeUserBroadcastPush(e));let n=[e.join_ref,e.ref,e.topic,e.event,e.payload];return t(JSON.stringify(n))}_binaryEncodeUserBroadcastPush(e){return this._isArrayBuffer(e.payload?.payload)?this._encodeBinaryUserBroadcastPush(e):this._encodeJsonUserBroadcastPush(e)}_encodeBinaryUserBroadcastPush(e){let t=e.payload?.payload??new ArrayBuffer(0);return this._encodeUserBroadcastPush(e,this.BINARY_ENCODING,t)}_encodeJsonUserBroadcastPush(e){let t=e.payload?.payload??{},n=new TextEncoder().encode(JSON.stringify(t)).buffer;return this._encodeUserBroadcastPush(e,this.JSON_ENCODING,n)}_encodeUserBroadcastPush(e,t,n){let r=new TextEncoder,i=r.encode(e.topic),a=r.encode(e.ref??``),o=r.encode(e.join_ref??``),s=r.encode(e.payload.event),c=this.allowedMetadataKeys?this._pick(e.payload,this.allowedMetadataKeys):{},l=r.encode(Object.keys(c).length===0?``:JSON.stringify(c));if(o.length>255)throw Error(`joinRef length ${o.length} exceeds maximum of 255`);if(a.length>255)throw Error(`ref length ${a.length} exceeds maximum of 255`);if(i.length>255)throw Error(`topic length ${i.length} exceeds maximum of 255`);if(s.length>255)throw Error(`userEvent length ${s.length} exceeds maximum of 255`);if(l.length>255)throw Error(`metadata length ${l.length} exceeds maximum of 255`);let u=this.USER_BROADCAST_PUSH_META_LENGTH+o.length+a.length+i.length+s.length+l.length,d=new ArrayBuffer(this.HEADER_LENGTH+u),f=new DataView(d),p=new Uint8Array(d),m=0;f.setUint8(m++,this.KINDS.userBroadcastPush),f.setUint8(m++,o.length),f.setUint8(m++,a.length),f.setUint8(m++,i.length),f.setUint8(m++,s.length),f.setUint8(m++,l.length),f.setUint8(m++,t),p.set(o,m),m+=o.length,p.set(a,m),m+=a.length,p.set(i,m),m+=i.length,p.set(s,m),m+=s.length,p.set(l,m),m+=l.length;var h=new Uint8Array(d.byteLength+n.byteLength);return h.set(new Uint8Array(d),0),h.set(new Uint8Array(n),d.byteLength),h.buffer}decode(e,t){if(this._isArrayBuffer(e))return t(this._binaryDecode(e));if(typeof e==`string`){let[n,r,i,a,o]=JSON.parse(e);return t({join_ref:n,ref:r,topic:i,event:a,payload:o})}return t({})}_binaryDecode(e){let t=new DataView(e),n=t.getUint8(0),r=new TextDecoder;switch(n){case this.KINDS.userBroadcast:return this._decodeUserBroadcast(e,t,r)}}_decodeUserBroadcast(e,t,n){let r=t.getUint8(1),i=t.getUint8(2),a=t.getUint8(3),o=t.getUint8(4),s=this.HEADER_LENGTH+4,c=n.decode(e.slice(s,s+r));s+=r;let l=n.decode(e.slice(s,s+i));s+=i;let u=n.decode(e.slice(s,s+a));s+=a;let d=e.slice(s,e.byteLength),f=o===this.JSON_ENCODING?JSON.parse(n.decode(d)):d,p={type:this.BROADCAST_EVENT,event:l,payload:f};return a>0&&(p.meta=JSON.parse(u)),{join_ref:null,ref:null,topic:c,event:this.BROADCAST_EVENT,payload:p}}_isArrayBuffer(e){return e instanceof ArrayBuffer||e?.constructor?.name===`ArrayBuffer`}_pick(e,t){return!e||typeof e!=`object`?{}:Object.fromEntries(Object.entries(e).filter(([e])=>t.includes(e)))}},y;(function(e){e.abstime=`abstime`,e.bool=`bool`,e.date=`date`,e.daterange=`daterange`,e.float4=`float4`,e.float8=`float8`,e.int2=`int2`,e.int4=`int4`,e.int4range=`int4range`,e.int8=`int8`,e.int8range=`int8range`,e.json=`json`,e.jsonb=`jsonb`,e.money=`money`,e.numeric=`numeric`,e.oid=`oid`,e.reltime=`reltime`,e.text=`text`,e.time=`time`,e.timestamp=`timestamp`,e.timestamptz=`timestamptz`,e.timetz=`timetz`,e.tsrange=`tsrange`,e.tstzrange=`tstzrange`})(y||={});let _e=(e,t,n={})=>{let r=n.skipTypes??[];return t?Object.keys(t).reduce((n,i)=>(n[i]=ve(i,e,t,r),n),{}):{}},ve=(e,t,n,r)=>{let i=t.find(t=>t.name===e)?.type,a=n[e];return i&&!r.includes(i)?ye(i,a):be(a)},ye=(e,t)=>{if(e.charAt(0)===`_`)return we(t,e.slice(1,e.length));switch(e){case y.bool:return xe(t);case y.float4:case y.float8:case y.int2:case y.int4:case y.int8:case y.numeric:case y.oid:return Se(t);case y.json:case y.jsonb:return Ce(t);case y.timestamp:return Te(t);case y.abstime:case y.date:case y.daterange:case y.int4range:case y.int8range:case y.money:case y.reltime:case y.text:case y.time:case y.timestamptz:case y.timetz:case y.tsrange:case y.tstzrange:return be(t);default:return be(t)}},be=e=>e,xe=e=>{switch(e){case`t`:return!0;case`f`:return!1;default:return e}},Se=e=>{if(typeof e==`string`){let t=parseFloat(e);if(!Number.isNaN(t))return t}return e},Ce=e=>{if(typeof e==`string`)try{return JSON.parse(e)}catch{return e}return e},we=(e,t)=>{if(typeof e!=`string`)return e;let n=e.length-1,r=e[n];if(e[0]===`{`&&r===`}`){let r,i=e.slice(1,n);try{r=JSON.parse(`[`+i+`]`)}catch{r=i?i.split(`,`):[]}return r.map(e=>ye(t,e))}return e},Te=e=>typeof e==`string`?e.replace(` `,`T`):e,Ee=e=>{let t=new URL(e);return t.protocol=t.protocol.replace(/^ws/i,`http`),t.pathname=t.pathname.replace(/\/+$/,``).replace(/\/socket\/websocket$/i,``).replace(/\/socket$/i,``).replace(/\/websocket$/i,``),t.pathname===``||t.pathname===`/`?t.pathname=`/api/broadcast`:t.pathname+=`/api/broadcast`,t.href};var b=e=>typeof e==`function`?e:function(){return e},De=typeof self<`u`?self:null,Oe=typeof window<`u`?window:null,x=De||Oe||globalThis,ke=`2.0.0`,Ae=1e4,je=1e3,Me=100,S={connecting:0,open:1,closing:2,closed:3},C={closed:`closed`,errored:`errored`,joined:`joined`,joining:`joining`,leaving:`leaving`},w={close:`phx_close`,error:`phx_error`,join:`phx_join`,reply:`phx_reply`,leave:`phx_leave`},Ne={longpoll:`longpoll`,websocket:`websocket`},Pe={complete:4},Fe=`base64url.bearer.phx.`,Ie=class{constructor(e,t,n,r){this.channel=e,this.event=t,this.payload=n||function(){return{}},this.receivedResp=null,this.timeout=r,this.timeoutTimer=null,this.recHooks=[],this.sent=!1,this.ref=void 0}resend(e){this.timeout=e,this.reset(),this.send()}send(){this.hasReceived(`timeout`)||(this.startTimeout(),this.sent=!0,this.channel.socket.push({topic:this.channel.topic,event:this.event,payload:this.payload(),ref:this.ref,join_ref:this.channel.joinRef()}))}receive(e,t){return this.hasReceived(e)&&t(this.receivedResp.response),this.recHooks.push({status:e,callback:t}),this}reset(){this.cancelRefEvent(),this.ref=null,this.refEvent=null,this.receivedResp=null,this.sent=!1}destroy(){this.cancelRefEvent(),this.cancelTimeout()}matchReceive({status:e,response:t,_ref:n}){this.recHooks.filter(t=>t.status===e).forEach(e=>e.callback(t))}cancelRefEvent(){this.refEvent&&this.channel.off(this.refEvent)}cancelTimeout(){clearTimeout(this.timeoutTimer),this.timeoutTimer=null}startTimeout(){this.timeoutTimer&&this.cancelTimeout(),this.ref=this.channel.socket.makeRef(),this.refEvent=this.channel.replyEventName(this.ref),this.channel.on(this.refEvent,e=>{this.cancelRefEvent(),this.cancelTimeout(),this.receivedResp=e,this.matchReceive(e)}),this.timeoutTimer=setTimeout(()=>{this.trigger(`timeout`,{})},this.timeout)}hasReceived(e){return this.receivedResp&&this.receivedResp.status===e}trigger(e,t){this.channel.trigger(this.refEvent,{status:e,response:t})}},Le=class{constructor(e,t){this.callback=e,this.timerCalc=t,this.timer=void 0,this.tries=0}reset(){this.tries=0,clearTimeout(this.timer)}scheduleTimeout(){clearTimeout(this.timer),this.timer=setTimeout(()=>{this.tries+=1,this.callback()},this.timerCalc(this.tries+1))}},Re=class{constructor(e,t,n){this.state=C.closed,this.topic=e,this.params=b(t||{}),this.socket=n,this.bindings=[],this.bindingRef=0,this.timeout=this.socket.timeout,this.joinedOnce=!1,this.joinPush=new Ie(this,w.join,this.params,this.timeout),this.pushBuffer=[],this.stateChangeRefs=[],this.rejoinTimer=new Le(()=>{this.socket.isConnected()&&this.rejoin()},this.socket.rejoinAfterMs),this.stateChangeRefs.push(this.socket.onError(()=>this.rejoinTimer.reset())),this.stateChangeRefs.push(this.socket.onOpen(()=>{this.rejoinTimer.reset(),this.isErrored()&&this.rejoin()})),this.joinPush.receive(`ok`,()=>{this.state=C.joined,this.rejoinTimer.reset(),this.pushBuffer.forEach(e=>e.send()),this.pushBuffer=[]}),this.joinPush.receive(`error`,e=>{this.state=C.errored,this.socket.hasLogger()&&this.socket.log(`channel`,`error ${this.topic}`,e),this.socket.isConnected()&&this.rejoinTimer.scheduleTimeout()}),this.onClose(()=>{this.rejoinTimer.reset(),this.socket.hasLogger()&&this.socket.log(`channel`,`close ${this.topic}`),this.state=C.closed,this.socket.remove(this)}),this.onError(e=>{this.socket.hasLogger()&&this.socket.log(`channel`,`error ${this.topic}`,e),this.isJoining()&&this.joinPush.reset(),this.state=C.errored,this.socket.isConnected()&&this.rejoinTimer.scheduleTimeout()}),this.joinPush.receive(`timeout`,()=>{this.socket.hasLogger()&&this.socket.log(`channel`,`timeout ${this.topic}`,this.joinPush.timeout),new Ie(this,w.leave,b({}),this.timeout).send(),this.state=C.errored,this.joinPush.reset(),this.socket.isConnected()&&this.rejoinTimer.scheduleTimeout()}),this.on(w.reply,(e,t)=>{this.trigger(this.replyEventName(t),e)})}join(e=this.timeout){if(this.joinedOnce)throw Error(`tried to join multiple times. 'join' can only be called a single time per channel instance`);return this.timeout=e,this.joinedOnce=!0,this.rejoin(),this.joinPush}teardown(){this.pushBuffer.forEach(e=>e.destroy()),this.pushBuffer=[],this.rejoinTimer.reset(),this.joinPush.destroy(),this.state=C.closed,this.bindings=[]}onClose(e){this.on(w.close,e)}onError(e){return this.on(w.error,t=>e(t))}on(e,t){let n=this.bindingRef++;return this.bindings.push({event:e,ref:n,callback:t}),n}off(e,t){this.bindings=this.bindings.filter(n=>!(n.event===e&&(t===void 0||t===n.ref)))}canPush(){return this.socket.isConnected()&&this.isJoined()}push(e,t,n=this.timeout){if(t||={},!this.joinedOnce)throw Error(`tried to push '${e}' to '${this.topic}' before joining. Use channel.join() before pushing events`);let r=new Ie(this,e,function(){return t},n);return this.canPush()?r.send():(r.startTimeout(),this.pushBuffer.push(r)),r}leave(e=this.timeout){this.rejoinTimer.reset(),this.joinPush.cancelTimeout(),this.state=C.leaving;let t=()=>{this.socket.hasLogger()&&this.socket.log(`channel`,`leave ${this.topic}`),this.trigger(w.close,`leave`)},n=new Ie(this,w.leave,b({}),e);return n.receive(`ok`,()=>t()).receive(`timeout`,()=>t()),n.send(),this.canPush()||n.trigger(`ok`,{}),n}onMessage(e,t,n){return t}filterBindings(e,t,n){return!0}isMember(e,t,n,r){return this.topic===e?r&&r!==this.joinRef()?(this.socket.hasLogger()&&this.socket.log(`channel`,`dropping outdated message`,{topic:e,event:t,payload:n,joinRef:r}),!1):!0:!1}joinRef(){return this.joinPush.ref}rejoin(e=this.timeout){this.isLeaving()||(this.socket.leaveOpenTopic(this.topic),this.state=C.joining,this.joinPush.resend(e))}trigger(e,t,n,r){let i=this.onMessage(e,t,n,r);if(t&&!i)throw Error(`channel onMessage callbacks must return the payload, modified or unmodified`);let a=this.bindings.filter(r=>r.event===e&&this.filterBindings(r,t,n));for(let e=0;e<a.length;e++)a[e].callback(i,n,r||this.joinRef())}replyEventName(e){return`chan_reply_${e}`}isClosed(){return this.state===C.closed}isErrored(){return this.state===C.errored}isJoined(){return this.state===C.joined}isJoining(){return this.state===C.joining}isLeaving(){return this.state===C.leaving}},ze=class{static request(e,t,n,r,i,a,o){if(x.XDomainRequest){let n=new x.XDomainRequest;return this.xdomainRequest(n,e,t,r,i,a,o)}else if(x.XMLHttpRequest){let s=new x.XMLHttpRequest;return this.xhrRequest(s,e,t,n,r,i,a,o)}else if(x.fetch&&x.AbortController)return this.fetchRequest(e,t,n,r,i,a,o);else throw Error(`No suitable XMLHttpRequest implementation found`)}static fetchRequest(e,t,n,r,i,a,o){let s={method:e,headers:n,body:r},c=null;return i&&(c=new AbortController,setTimeout(()=>c.abort(),i),s.signal=c.signal),x.fetch(t,s).then(e=>e.text()).then(e=>this.parseJSON(e)).then(e=>o&&o(e)).catch(e=>{e.name===`AbortError`&&a?a():o&&o(null)}),c}static xdomainRequest(e,t,n,r,i,a,o){return e.timeout=i,e.open(t,n),e.onload=()=>{let t=this.parseJSON(e.responseText);o&&o(t)},a&&(e.ontimeout=a),e.onprogress=()=>{},e.send(r),e}static xhrRequest(e,t,n,r,i,a,o,s){e.open(t,n,!0),e.timeout=a;for(let[t,n]of Object.entries(r))e.setRequestHeader(t,n);return e.onerror=()=>s&&s(null),e.onreadystatechange=()=>{e.readyState===Pe.complete&&s&&s(this.parseJSON(e.responseText))},o&&(e.ontimeout=o),e.send(i),e}static parseJSON(e){if(!e||e===``)return null;try{return JSON.parse(e)}catch{return console&&console.log(`failed to parse JSON response`,e),null}}static serialize(e,t){let n=[];for(var r in e){if(!Object.prototype.hasOwnProperty.call(e,r))continue;let i=t?`${t}[${r}]`:r,a=e[r];typeof a==`object`?n.push(this.serialize(a,i)):n.push(encodeURIComponent(i)+`=`+encodeURIComponent(a))}return n.join(`&`)}static appendParams(e,t){return Object.keys(t).length===0?e:`${e}${e.match(/\?/)?`&`:`?`}${this.serialize(t)}`}},Be=e=>{let t=``,n=new Uint8Array(e),r=n.byteLength;for(let e=0;e<r;e++)t+=String.fromCharCode(n[e]);return btoa(t)},Ve=class{constructor(e,t){t&&t.length===2&&t[1].startsWith(Fe)&&(this.authToken=atob(t[1].slice(Fe.length))),this.endPoint=null,this.token=null,this.skipHeartbeat=!0,this.reqs=new Set,this.awaitingBatchAck=!1,this.currentBatch=null,this.currentBatchTimer=null,this.batchBuffer=[],this.onopen=function(){},this.onerror=function(){},this.onmessage=function(){},this.onclose=function(){},this.pollEndpoint=this.normalizeEndpoint(e),this.readyState=S.connecting,setTimeout(()=>this.poll(),0)}normalizeEndpoint(e){return e.replace(`ws://`,`http://`).replace(`wss://`,`https://`).replace(RegExp(`(.*)/`+Ne.websocket),`$1/`+Ne.longpoll)}endpointURL(){return ze.appendParams(this.pollEndpoint,{token:this.token})}closeAndRetry(e,t,n){this.close(e,t,n),this.readyState=S.connecting}ontimeout(){this.onerror(`timeout`),this.closeAndRetry(1005,`timeout`,!1)}isActive(){return this.readyState===S.open||this.readyState===S.connecting}poll(){let e={Accept:`application/json`};this.authToken&&(e[`X-Phoenix-AuthToken`]=this.authToken),this.ajax(`GET`,e,null,()=>this.ontimeout(),e=>{if(e){var{status:t,token:n,messages:r}=e;if(t===410&&this.token!==null){this.onerror(410),this.closeAndRetry(3410,`session_gone`,!1);return}this.token=n}else t=0;switch(t){case 200:r.forEach(e=>{setTimeout(()=>this.onmessage({data:e}),0)}),this.poll();break;case 204:this.poll();break;case 410:this.readyState=S.open,this.onopen({}),this.poll();break;case 403:this.onerror(403),this.close(1008,`forbidden`,!1);break;case 0:case 500:this.onerror(500),this.closeAndRetry(1011,`internal server error`,500);break;default:throw Error(`unhandled poll status ${t}`)}})}send(e){typeof e!=`string`&&(e=Be(e)),this.currentBatch?this.currentBatch.push(e):this.awaitingBatchAck?this.batchBuffer.push(e):(this.currentBatch=[e],this.currentBatchTimer=setTimeout(()=>{this.batchSend(this.currentBatch),this.currentBatch=null},0))}batchSend(e,t=0){this.awaitingBatchAck=!0;let n=t+Me,r=e.slice(t,n);this.ajax(`POST`,{"Content-Type":`application/x-ndjson`},r.join(`
@@ -2143,7 +2143,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
         <button class="close-btn" onclick="this.parentElement.style.display='none'">✕</button>
     </div>
 
-    <h2>🚘 公卫科下乡打卡 · v2.1.9.1</h2>
+    <h2>🚘 公卫科下乡打卡 · v2.2.0</h2>
     <div id="clockDisplay">📅 加载中...</div>
     <h2 style="font-size:16px;font-weight:400;color:#64748b;margin-top:-6px;margin-bottom:12px;"><small>六硍镇中心卫生院</small></h2>
     <div class="status-bar">
@@ -2191,6 +2191,16 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             <div id="userListBox" class="user-list"></div>
             <div class="text-muted mt-8" style="font-size:13px;"></div>
         </div>
+        <!-- v2.2.0 新增：固定人员管理卡片（仅管理员可见，登录成功后按 isWorkAdmin() 显示） -->
+        <div class="card" id="fixedUserCard" style="display:none;">
+            <div class="card-header"><h3>👥 固定人员管理</h3><span class="badge" id="fixedUserCountBadge">0 人</span></div>
+            <div class="row-row">
+                <input type="text" id="newFixedUserName" placeholder="输入固定人员姓名" />
+                <button class="btn btn-primary" onclick="addFixedUser()">➕ 添加</button>
+            </div>
+            <div id="fixedUserListBox" class="user-list"></div>
+            <div class="text-muted mt-8" style="font-size:13px;">固定人员显示在打卡下拉首位，增删保存云端后全员自动同步</div>
+        </div>
         <div class="card" id="formCard"><h3>✏️ 下乡打卡</h3>
             <div class="row"><label>下乡人员</label><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;width:100%;"><select id="user" style="flex:1;min-width:120px;"></select><button class="btn btn-sm btn-outline" id="copyLastBtn" onclick="copyLastRecord()" style="white-space:nowrap;font-size:12px;padding:6px 10px;">📝 复制上一次下乡</button></div></div>
             <div class="row"><label>村委（可多选）</label><div class="village-checkbox-group" id="villageCheckboxes"></div><div id="copyVillageHint" style="display:none;margin-top:6px;font-size:12px;color:#b45309;background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:4px 10px;">⚠️ 请确认村委是否正确</div></div>
@@ -2225,6 +2235,12 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             <label style="font-weight:500;font-size:14px;color:#334155;">📅 统计月份：</label>
             <input type="month" id="statsMonthPicker" onchange="onStatsMonthChange()" style="width:auto;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;" />
             <span id="statsMonthLabel" style="font-size:13px;color:#64748b;font-weight:500;"></span>
+            <!-- v2.2.0 新增：统计视图切换（仅 super_admin + 覃祖健可见，默认「只看自己」） -->
+            <span id="statsViewSwitcher" style="display:none;margin-left:auto;align-items:center;gap:6px;">
+                <span style="font-size:12px;color:#64748b;">👁 视图：</span>
+                <button class="btn btn-sm" id="statsViewSelfBtn" onclick="setStatsViewMode('self')" style="padding:4px 10px;font-size:12px;">只看自己</button>
+                <button class="btn btn-sm btn-outline" id="statsViewAllBtn" onclick="setStatsViewMode('all')" style="padding:4px 10px;font-size:12px;">全科室汇总</button>
+            </span>
         </div>
         <div id="statGrid" class="stat-grid"></div>
         <div id="statContent" class="text-muted" style="font-size:14px;"></div>
@@ -2264,6 +2280,10 @@ https://github.com/nodeca/pako/blob/main/LICENSE
                 <thead><tr><th class="th-checkbox"><input type="checkbox" id="selectAllHeader" onchange="toggleSelectAll()" /></th><th>#</th><th>下乡人员</th><th>下乡时间</th><th>村委</th><th>出行方式</th><th>费用</th><th>工作内容</th><th>导出状态</th><th style="min-width:70px;">操作</th></tr></thead>
                 <tbody id="tableBody"></tbody>
             </table>
+        </div>
+        <!-- v2.2.0 新增：记录明细 Excel 全量导出（导出当前筛选结果，按钮随登录身份显示） -->
+        <div style="display:flex;justify-content:flex-end;margin-top:10px;">
+            <button class="btn btn-success" onclick="exportRecordsExcel()" id="exportExcelBtn" style="display:none;">📄 导出明细</button>
         </div>
         <div class="text-muted text-center mt-8" style="font-size:13px;" id="tableFooter"></div>
     </div>
@@ -2578,6 +2598,15 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     <script type="application/json" id="changelog-data">
         [
             {
+                "version": "v2.2.0",
+                "date": "2026-10-09",
+                "items": [
+                    { "type": "新增", "scope": "all", "desc": "下乡记录表格新增「📄 导出明细」：按当前筛选（人员/月份/工作内容）一键导出原始明细 Excel（日期、姓名、村委、出行方式、工作内容、打卡时间），与报账单汇总格式互补" },
+                    { "type": "新增", "scope": "admin", "desc": "固定人员管理卡片：管理员可增删固定人员并保存云端，全员刷新自动同步，无需改代码发版；至少保留 1 人、重名自动拦截，云端读取失败自动降级内置 6 人名单" },
+                    { "type": "新增", "scope": "admin", "desc": "全科室汇总统计：统计区新增「只看自己 / 全科室汇总」切换（仅 super_admin + 覃祖健可见），汇总视图下月度日历标记所有有记录的日期、统计数字按全科汇总、近7天趋势图按成员分组对比；普通成员体验不变" }
+                ]
+            },
+            {
                 "version": "v2.1.9.1",
                 "date": "2026-09-30",
                 "items": [
@@ -2639,9 +2668,9 @@ https://github.com/nodeca/pako/blob/main/LICENSE
                 <!-- 头部 -->
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                     <h3 style="margin:0;font-size:18px;color:#1e293b;font-weight:700;">🎉 系统已更新</h3>
-                    <span id="versionLogBadge" style="background:linear-gradient(90deg,#3b82f6,#6366f1);color:#fff;font-size:12px;font-weight:600;padding:3px 12px;border-radius:12px;">v2.1.9.1</span>
+                    <span id="versionLogBadge" style="background:linear-gradient(90deg,#3b82f6,#6366f1);color:#fff;font-size:12px;font-weight:600;padding:3px 12px;border-radius:12px;">v2.2.0</span>
                 </div>
-                <p id="versionLogDate" style="font-size:12px;color:#94a3b8;margin:0 0 14px;">📅 2026-09-30</p>
+                <p id="versionLogDate" style="font-size:12px;color:#94a3b8;margin:0 0 14px;">📅 2026-10-09</p>
                 <!-- 更新列表（带左侧色条 + 类型标签） -->
                 <div id="versionLogList" style="display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;"></div>
                 <!-- 底部：不再提示复选框 + 我知道了主按钮 -->
@@ -3574,6 +3603,11 @@ https://github.com/nodeca/pako/blob/main/LICENSE
         const _wpBtn = document.getElementById('workPresetManageBtn');
 
         if (_wpBtn) _wpBtn.style.display = (typeof isWorkAdmin === 'function' && isWorkAdmin()) ? '' : 'none';
+
+        // v2.2.0：固定人员管理卡片仅 super_admin + 覃祖健可见（入口隐藏 + 函数内身份校验双重防线）
+        const _fuCard = document.getElementById('fixedUserCard');
+
+        if (_fuCard) _fuCard.style.display = (typeof isWorkAdmin === 'function' && isWorkAdmin()) ? '' : 'none';
 
         // v2.1.9：登录成功后拉取云端历史标签删除名单并合并
         if (typeof loadDeletedWorksFromCloud === 'function') {
@@ -5015,6 +5049,11 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
         document.getElementById('reportBtn').style.display = isReportUser ? 'inline-flex' : 'none';
 
+        // v2.2.0：记录明细 Excel 导出按钮，与现有导出按钮同权限显示（super_admin + fixed_user）
+        const _xlsExportBtn = document.getElementById('exportExcelBtn');
+
+        if (_xlsExportBtn) _xlsExportBtn.style.display = isReportUser ? 'inline-flex' : 'none';
+
         if (!isReportUser) {
 
             document.getElementById('exportBtn').disabled = true;
@@ -5227,9 +5266,58 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
     // ---- 9.3 统计汇总 ----
 
+    // v2.2.0：统计视图模式 'self'=只看自己（默认） / 'all'=全科室汇总（仅 super_admin + 覃祖健可切换）
+    let statsViewMode = 'self';
+
+    // v2.2.0：全科室汇总图表成员配色（循环使用）
+    const STATS_MEMBER_COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#6366f1'];
+
+    // v2.2.0：是否具备统计视图切换权限（super_admin + 覃祖健）
+    function canViewAllStats() {
+        return (typeof isWorkAdmin === 'function') && isWorkAdmin();
+    }
+
+    // v2.2.0：切换统计视图（仅管理员可用；普通成员无开关，数据隔离规则不变）
+    function setStatsViewMode(mode) {
+        if (!canViewAllStats()) { alert('权限不足，仅管理员可切换统计视图'); return; }
+        if (statsViewMode === mode) return;
+        statsViewMode = mode;
+        updateStatsViewSwitcher();
+        renderStats();
+    }
+
+    // v2.2.0：同步统计视图切换开关的显示与选中态（非管理员强制回「只看自己」并隐藏）
+    function updateStatsViewSwitcher() {
+        const box = document.getElementById('statsViewSwitcher');
+        if (!box) return;
+        const show = canViewAllStats();
+        if (!show && statsViewMode !== 'self') statsViewMode = 'self';
+        box.style.display = show ? 'inline-flex' : 'none';
+        const selfBtn = document.getElementById('statsViewSelfBtn');
+        const allBtn = document.getElementById('statsViewAllBtn');
+        if (selfBtn) {
+            selfBtn.style.background = statsViewMode === 'self' ? '#3b82f6' : '';
+            selfBtn.style.color = statsViewMode === 'self' ? '#fff' : '';
+            selfBtn.style.borderColor = statsViewMode === 'self' ? '#3b82f6' : '';
+        }
+        if (allBtn) {
+            allBtn.style.background = statsViewMode === 'all' ? '#3b82f6' : '';
+            allBtn.style.color = statsViewMode === 'all' ? '#fff' : '';
+            allBtn.style.borderColor = statsViewMode === 'all' ? '#3b82f6' : '';
+        }
+    }
+
     function renderStats() {
+        // v2.2.0：同步统计视图切换开关显示状态（仅管理员可见）
+        updateStatsViewSwitcher();
+
         // 获取所有符合权限的记录
         let list = getFilteredRecords();
+
+        // v2.2.0：管理员「全科室汇总」视图——绕过当前身份视角限制，取全科全部未删除记录（管理员有全量查看权限）
+        if (canViewAllStats() && statsViewMode === 'all') {
+            list = allRecords.filter(r => !r.deleted_at);
+        }
 
         // ★★★ 按统计月份过滤 ★★★
         if (statsMonth) {
@@ -5240,7 +5328,8 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             });
         }
 
-        const visibleUsers = getUsersForView('stat');
+        // v2.2.0：全科室汇总视图下人员列表为全科全部人员（个人统计按成员对比）
+        const visibleUsers = (canViewAllStats() && statsViewMode === 'all') ? getAllUsers() : getUsersForView('stat');
         const totalCount = list.length;
         const daySet = new Set();
         list.forEach(r => daySet.add(r.date || getDateKey(new Date(r.time))));
@@ -5323,11 +5412,25 @@ https://github.com/nodeca/pako/blob/main/LICENSE
                 dayLabels.push((d.getMonth() + 1) + '/' + d.getDate());
             }
             const trendData = dayKeys.map(k => list.filter(r => (r.date || getDateKey(new Date(r.time))) === k).length);
+            // v2.2.0：全科室汇总视图下趋势图按成员分组对比（堆叠柱状图）
+            let trendDatasets = [{ label: '打卡次数', data: trendData, backgroundColor: '#3b82f6', borderRadius: 6 }];
+            let trendStacked = false;
+            if (canViewAllStats() && statsViewMode === 'all') {
+                trendStacked = true;
+                const present = getAllUsers().filter(u => list.some(r => r.user === u));
+                list.forEach(r => { if (!present.includes(r.user)) present.push(r.user); });
+                trendDatasets = present.map((u, i) => ({
+                    label: u,
+                    data: dayKeys.map(k => list.filter(r => r.user === u && (r.date || getDateKey(new Date(r.time))) === k).length),
+                    backgroundColor: STATS_MEMBER_COLORS[i % STATS_MEMBER_COLORS.length],
+                    borderRadius: 4
+                }));
+            }
             if (window._gongweiCharts.trend) window._gongweiCharts.trend.destroy();
             window._gongweiCharts.trend = new Chart(document.getElementById('trendChart'), {
                 type: 'bar',
-                data: { labels: dayLabels, datasets: [{ label: '打卡次数', data: trendData, backgroundColor: '#3b82f6', borderRadius: 6 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
+                data: { labels: dayLabels, datasets: trendDatasets },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: trendStacked, labels: { boxWidth: 12, font: { size: 10 } } } }, scales: { x: { stacked: trendStacked }, y: { beginAtZero: true, ticks: { precision: 0 }, stacked: trendStacked } } }
             });
             // 各村屯分布
             const villageCount = {};
@@ -5824,7 +5927,12 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
         let monthRecords = allRecords.filter(r => !r.deleted_at);
 
-        monthRecords = filterRecordsByRole(monthRecords, startDate, endDate);
+        // v2.2.0：管理员「全科室汇总」视图——日历标记所有有记录的日期、统计按全科汇总（绕过身份视角过滤，管理员有全量查看权限）
+        if (!(canViewAllStats() && statsViewMode === 'all')) {
+
+            monthRecords = filterRecordsByRole(monthRecords, startDate, endDate);
+
+        }
 
 
 
@@ -6951,6 +7059,77 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             renderWorkFilterOptions();
         } else {
             alert('❌ 保存失败，请检查网络或确认已创建 config 表');
+        }
+    }
+
+    // ======================== v2.2.0 固定人员管理（仅管理员） ========================
+
+    // v2.2.0：渲染固定人员管理卡片列表（复用 user-tag/del-btn 样式）
+    function renderFixedUserManageList() {
+        const box = document.getElementById('fixedUserListBox');
+        const badge = document.getElementById('fixedUserCountBadge');
+        if (badge) badge.textContent = CONFIG.FIXED_USERS.length + ' 人';
+        if (!box) return;
+        box.innerHTML = '';
+        CONFIG.FIXED_USERS.forEach(name => {
+            const span = document.createElement('span');
+            span.className = 'user-tag';
+            const delBtn = document.createElement('span');
+            delBtn.className = 'del-btn';
+            delBtn.textContent = '×';
+            delBtn.title = '删除';
+            delBtn.onclick = () => removeFixedUser(name);
+            span.innerHTML = name + ' ';
+            span.appendChild(delBtn);
+            box.appendChild(span);
+        });
+    }
+
+    // v2.2.0：保存固定人员名单到云端 config 表（key=fixed_users），成功后刷新人员池与界面
+    async function saveFixedUsersToCloud() {
+        const ok = await saveWorkConfig('fixed_users', CONFIG.FIXED_USERS);
+        if (ok) {
+            // 覆盖后同步刷新 allUsers（16 处 CONFIG.FIXED_USERS 引用自动生效）
+            await refreshUsers();
+            renderFixedUserManageList();
+            renderUserManage();
+            showToast('✅ 固定人员已保存到云端，全员下次刷新自动同步');
+        } else {
+            alert('❌ 保存失败，请检查网络或确认已创建 config 表');
+        }
+    }
+
+    // v2.2.0：新增固定人员（写操作第一行校验管理员身份；重名校验：与固定人员/普通成员都不能重）
+    async function addFixedUser() {
+        if (!isWorkAdmin()) { alert('权限不足，仅管理员可操作'); return; }
+        const input = document.getElementById('newFixedUserName');
+        const name = ((input && input.value) || '').trim();
+        if (!name) { alert('请输入姓名'); return; }
+        if (CONFIG.FIXED_USERS.includes(name)) { alert('该姓名已在固定人员名单中'); return; }
+        if (getNormalUsers().includes(name)) { alert('该姓名已是普通成员，不能重复添加'); return; }
+        CONFIG.FIXED_USERS.push(name);
+        if (input) input.value = '';
+        renderFixedUserManageList();
+        await saveFixedUsersToCloud();
+    }
+
+    // v2.2.0：删除固定人员（写操作第一行校验管理员身份；至少保留 1 人）
+    async function removeFixedUser(name) {
+        if (!isWorkAdmin()) { alert('权限不足，仅管理员可操作'); return; }
+        if (CONFIG.FIXED_USERS.length <= 1) { alert('至少保留 1 名固定人员，不能全部删除'); return; }
+        if (!confirm('确定删除固定人员「' + name + '」？')) return;
+        CONFIG.FIXED_USERS = CONFIG.FIXED_USERS.filter(n => n !== name);
+        await saveFixedUsersToCloud();
+    }
+
+    // v2.2.0：启动时加载云端固定人员名单（key=fixed_users），失败降级内置默认 6 人
+    async function loadFixedUsersFromCloud() {
+        const cloud = await loadWorkConfig('fixed_users');
+        if (Array.isArray(cloud) && cloud.length > 0) {
+            CONFIG.FIXED_USERS = cloud;
+            console.warn('✅ 已从云端加载固定人员名单:', cloud.length + ' 人');
+            // 云端名单覆盖后同步刷新人员池（renderAll 稍后在 init 中统一执行）
+            await refreshUsers();
         }
     }
 
@@ -8225,6 +8404,117 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
 
     // ---- 12.3 报账单导出（含月份选择+Excel格式） ----
+
+    // ---- v2.2.0 记录明细 Excel 全量导出（导出当前筛选结果：人员/月份/工作内容叠加后的可见记录） ----
+    async function exportRecordsExcel() {
+
+        if (userRole !== 'super_admin' && userRole !== 'fixed_user') {
+
+            alert('⛔ 您没有导出数据的权限');
+
+            return;
+
+        }
+
+        if (typeof ExcelJS === 'undefined') {
+
+            alert('❌ ExcelJS 库未加载，请刷新页面重试。');
+
+            return;
+
+        }
+
+        // 与 renderTable 相同的筛选逻辑：用户 + 月份 + 工作内容叠加
+        let filtered = getFilteredRecords();
+
+        const fUser = document.getElementById('filterUser')?.value || '';
+
+        const fMonth = document.getElementById('filterMonth')?.value || '';
+
+        const fWork = document.getElementById('filterWork')?.value || '';
+
+        if (fUser) filtered = filtered.filter(r => r.user === fUser);
+
+        if (fMonth) {
+            const [year, month] = fMonth.split('-').map(Number);
+            filtered = filtered.filter(r => {
+                const d = new Date(r.time);
+                return d.getFullYear() === year && d.getMonth() === month - 1;
+            });
+        }
+
+        if (fWork) filtered = filtered.filter(r => (r.work || '').trim() === fWork);
+
+        filtered.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+        if (filtered.length === 0) {
+
+            alert('📭 当前筛选条件下暂无记录可导出');
+
+            return;
+
+        }
+
+        try {
+            const workbook = new ExcelJS.Workbook();
+
+            const ws = workbook.addWorksheet('下乡记录明细');
+
+            // 列：日期、姓名、村委、出行方式、工作内容、打卡时间
+            ws.columns = [
+                { header: '日期', key: 'date', width: 13 },
+                { header: '姓名', key: 'user', width: 11 },
+                { header: '村委', key: 'village', width: 26 },
+                { header: '出行方式', key: 'type', width: 10 },
+                { header: '工作内容', key: 'work', width: 30 },
+                { header: '打卡时间', key: 'time', width: 19 }
+            ];
+
+            filtered.forEach(r => {
+                const d = new Date(r.time);
+                const dateStr = r.date || (isNaN(d.getTime()) ? '' :
+                    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`);
+                ws.addRow({
+                    date: dateStr,
+                    user: r.user || '',
+                    village: r.village || '',
+                    type: r.type || '',
+                    work: r.work || '',
+                    time: r.time || ''
+                });
+            });
+
+            // 表头样式
+            const headerRow = ws.getRow(1);
+            headerRow.font = { bold: true, size: 12 };
+            headerRow.alignment = { vertical: 'middle', horizontal: 'center' };
+            headerRow.height = 22;
+
+            const buffer = await workbook.xlsx.writeBuffer();
+
+            const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+
+            const monthPart = fMonth ? fMonth : '全部月份';
+
+            a.download = `下乡记录明细_${monthPart}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+
+            a.href = url;
+
+            a.click();
+
+            URL.revokeObjectURL(url);
+
+            showToast(`✅ 已导出 ${filtered.length} 条明细记录`);
+        } catch (e) {
+            console.error('exportRecordsExcel 失败:', e);
+            alert('❌ 导出失败：' + (e && e.message || e));
+        }
+
+    }
 
     // v2.1.5 修改五：导出入口改造为按工作类型筛选
 
@@ -9768,6 +10058,9 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             await loadWorkPresetsFromCloud();
 
             await loadDeletedWorksFromCloud();
+
+            // v2.2.0：加载云端固定人员名单（key=fixed_users，失败降级内置默认 6 人）
+            await loadFixedUsersFromCloud();
 
             if (typeof refreshWorkTypes === 'function') refreshWorkTypes();
 
