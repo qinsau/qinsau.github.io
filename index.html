@@ -5222,7 +5222,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     const fixedUsers = CONFIG.FIXED_USERS;
     const normalUsers = users.filter(name => !fixedUsers.includes(name));
 
-    // ---- 固定人员（v2.2.0 收敛：去掉橙色呼吸闪烁动画，改为安静的紧凑标签行） ----
+    // ---- 固定人员（v2.2.0：保留呼吸闪烁动态框，去掉标题文字只留名字） ----
     if (fixedUsers.length > 0) {
         const container = document.createElement('div');
         container.className = 'fixed-users-container';
@@ -5230,23 +5230,27 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 4px 6px;
+            gap: 2px 6px;
             border-radius: 8px;
-            padding: 6px 8px;
+            padding: 2px 8px;
             margin-bottom: 6px;
-            background: rgba(254, 243, 199, 0.4);
-            border: 1px solid #fde68a;
+            background: rgba(254, 243, 199, 0.55);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 2px solid #d1d5db;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8);
+            animation: breathe-amber 1.8s ease-in-out infinite;
         `;
-
-        const labelSpan = document.createElement('span');
-        labelSpan.textContent = '固定人员';
-        labelSpan.style.cssText = 'font-size:12px;font-weight:600;color:#92400e;flex-shrink:0;margin-right:2px;';
-        container.appendChild(labelSpan);
 
         fixedUsers.forEach((name, index) => {
             const nameSpan = document.createElement('span');
             nameSpan.textContent = name;
-            nameSpan.style.cssText = 'font-size:13px;font-weight:500;color:#78350f;padding:2px 8px;border-radius:12px;background:rgba(255,255,255,0.75);cursor:default;flex-shrink:0;';
+            nameSpan.style.fontSize = '14px';
+            nameSpan.style.fontWeight = '500';
+            nameSpan.style.color = '#78350f';
+            nameSpan.style.padding = '2px 6px';
+            nameSpan.style.cursor = 'default';
+            nameSpan.style.flexShrink = '0';
             nameSpan.onmouseenter = () => nameSpan.style.color = '#d97706';
             nameSpan.onmouseleave = () => nameSpan.style.color = '#78350f';
             container.appendChild(nameSpan);
@@ -10629,4 +10633,4 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
 </script>
 </body>
-</html>
+</html
