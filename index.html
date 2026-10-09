@@ -2190,16 +2190,16 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             </div>
             <div id="userListBox" class="user-list"></div>
             <div class="text-muted mt-8" style="font-size:13px;"></div>
-        </div>
-        <!-- v2.2.0 新增：固定人员管理卡片（仅管理员可见，登录成功后按 isWorkAdmin() 显示） -->
-        <div class="card" id="fixedUserCard" style="display:none;">
-            <div class="card-header"><h3>👥 固定人员管理</h3><span class="badge" id="fixedUserCountBadge">0 人</span></div>
-            <div class="row-row">
-                <input type="text" id="newFixedUserName" placeholder="输入固定人员姓名" />
-                <button class="btn btn-primary" onclick="addFixedUser()">➕ 添加</button>
+            <!-- v2.2.0：固定人员管理区块（仅管理员可见，登录成功后按 isWorkAdmin() 显示；嵌入人员管理卡片内，不占独立方框） -->
+            <div id="fixedUserCard" style="display:none;border-top:1px dashed #e2e8f0;margin-top:12px;padding-top:12px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><b style="font-size:13px;">👥 固定人员</b><span class="badge" id="fixedUserCountBadge">0 人</span></div>
+                <div id="fixedUserListBox" class="user-list"></div>
+                <div class="row-row" style="margin-top:8px;">
+                    <input type="text" id="newFixedUserName" placeholder="输入固定人员姓名" />
+                    <button class="btn btn-primary" onclick="addFixedUser()">➕ 添加</button>
+                </div>
+                <div class="text-muted mt-8" style="font-size:12px;">固定人员显示在打卡下拉首位，增删保存云端后全员自动同步</div>
             </div>
-            <div id="fixedUserListBox" class="user-list"></div>
-            <div class="text-muted mt-8" style="font-size:13px;">固定人员显示在打卡下拉首位，增删保存云端后全员自动同步</div>
         </div>
         <div class="card" id="formCard"><h3>✏️ 下乡打卡</h3>
             <div class="row"><label>下乡人员</label><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;width:100%;"><select id="user" style="flex:1;min-width:120px;"></select><button class="btn btn-sm btn-outline" id="copyLastBtn" onclick="copyLastRecord()" style="white-space:nowrap;font-size:12px;padding:6px 10px;">📝 复制上一次下乡</button></div></div>
@@ -3604,7 +3604,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
         if (_wpBtn) _wpBtn.style.display = (typeof isWorkAdmin === 'function' && isWorkAdmin()) ? '' : 'none';
 
-        // v2.2.0：固定人员管理卡片仅 super_admin + 覃祖健可见（入口隐藏 + 函数内身份校验双重防线）
+        // v2.2.0：固定人员管理区块仅 super_admin + 覃祖健可见（入口隐藏 + 函数内身份校验双重防线；嵌入人员管理卡片内）
         const _fuCard = document.getElementById('fixedUserCard');
 
         if (_fuCard) _fuCard.style.display = (typeof isWorkAdmin === 'function' && isWorkAdmin()) ? '' : 'none';
