@@ -1825,13 +1825,14 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             }
         }
         /* v2.1.6 修改一：固定人员移动端适配（扩展至 768px） */
+        /* v2.2.1 修正：移动端也要自适应内容宽度，与 PC 端一致，不再占满整行 */
         @media (max-width: 768px) {
             .fixed-users-container {
-                display: flex !important;
+                display: inline-flex !important;
                 flex-wrap: wrap !important;
                 justify-content: flex-start !important;
                 gap: 4px 6px !important;
-                width: 100% !important;
+                width: fit-content !important;
                 max-width: 100% !important;
             }
             .fixed-users-container span {
