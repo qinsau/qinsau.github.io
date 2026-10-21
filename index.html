@@ -2335,7 +2335,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
                     <div id="editWorkHistory" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center;"></div>
                 </div>
             </div>
-            <div class="btns"><button class="btn btn-outline" onclick="closeEditModal()">取消</button><button class="btn btn-primary" onclick="saveEdit()">保存</button></div></div></div>
+            <div class="btns"><button class="btn btn-outline" onclick="closeEditModal()">取消</button><button class="btn btn-outline" onclick="saveAsNewRecord()" style="color:#059669;border-color:#059669;">💾 存为新记录</button><button class="btn btn-primary" onclick="saveEdit()">保存</button></div></div></div>
 
     <!-- ===== 修改密码模态框 ===== -->
     <div class="modal-mask" id="pwdModal"><div class="modal-box"><h3>🔑 修改管理员密码</h3><div class="row"><label>当前密码</label><input type="password" id="oldPwd" placeholder="输入当前密码" /></div><div class="row"><label>新密码</label><input type="password" id="newPwd" placeholder="输入新密码（至少4位）" /></div><div class="row"><label>确认新密码</label><input type="password" id="confirmPwd" placeholder="再次输入新密码" /></div><div class="btns"><button class="btn btn-outline" onclick="closePwdModal()">取消</button><button class="btn btn-primary" onclick="confirmChangePwd()">确认</button></div></div></div>
@@ -5379,7 +5379,8 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     // ---- 9.3 统计汇总 ----
 
     // v2.2.0：统计视图模式 'self'=只看自己（默认） / 'all'=全科室汇总（仅 super_admin + 覃祖健可切换）
-    let statsViewMode = 'self';
+    // v2.3.0：刷新后记忆 —— 优先读 localStorage，无记录回退 'self'
+    let statsViewMode = localStorage.getItem('statsViewMode') || 'self';
 
     // v2.2.0：全科室汇总图表成员配色（循环使用）
     const STATS_MEMBER_COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#6366f1'];
@@ -5390,10 +5391,12 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     }
 
     // v2.2.0：切换统计视图（仅管理员可用；普通成员无开关，数据隔离规则不变）
+    // v2.3.0：切换时写入 localStorage 记忆
     function setStatsViewMode(mode) {
         if (!canViewAllStats()) { alert('权限不足，仅管理员可切换统计视图'); return; }
         if (statsViewMode === mode) return;
         statsViewMode = mode;
+        localStorage.setItem('statsViewMode', mode);
         updateStatsViewSwitcher();
         renderStats();
     }
@@ -8138,6 +8141,96 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
     }
 
+    // v2.3.0：存为新记录 —— 复用编辑表单数据，新增一条记录（新 id、新 created_at），不修改原记录
+    async function saveAsNewRecord() {
+
+        const auth = getAuthStatus();
+
+        if (!auth || !auth.role || auth.role === 'visitor') { alert('👤 请先选择身份登录'); return; }
+
+        if (!canOperate()) {
+            if (isNightTime()) alert('🌙 非工作时段（19:00-08:00），系统已关闭');
+            else alert('⛔ 系统已关闭，无法保存');
+            return;
+        }
+
+        if (!systemState?.isOpen) { alert('⛔ 系统已关闭，无法保存'); return; }
+
+        if (!isCloudConnected) {
+            if (!confirm('⚠️ 未连接云端，保存将仅本地生效，联网后云端可能覆盖。确定继续吗？')) return;
+        }
+
+        const user = document.getElementById('editUser').value;
+
+        const permAdd = checkPermission('add', null, user);
+        if (!permAdd.allowed) { alert('⛔ ' + permAdd.msg); return; }
+
+        const villages = getSelectedVillages('editVillageCheckboxes');
+        if (!villages) { alert('请至少选择一个下乡村委'); return; }
+
+        const vehicle = document.querySelector('input[name="editVehicle"]:checked');
+        if (!vehicle) { alert('请选择出行方式'); return; }
+
+        const type = vehicle.value;
+        const timeVal = document.getElementById('editTime').value;
+        const work = document.getElementById('editWorkInput').value.trim() || '未填写';
+
+        let timeObj = timeVal ? new Date(timeVal) : new Date();
+        if (isNaN(timeObj.getTime())) { alert('时间格式无效'); return; }
+
+        const timeStr = timeObj.toLocaleString('zh-CN', { hour12: false });
+        const dateKey = getDateKey(timeObj);
+        const todayKey = getDateKey(new Date());
+
+        if (dateKey > todayKey) { alert('⛔ 不能选择未来的日期'); return; }
+
+        const special = getDaySpecial(dateKey);
+        if (special && special.type === 'holiday') {
+            if (!confirm(`⚠️ 您选择的日期是【${special.label}】法定节假日，确定要保存吗？`)) return;
+        }
+
+        // 与原记录的重复检查排除（因为我们就是要另存一份）
+        const recordId = document.getElementById('editIndex').value;
+        const dup = allRecords.some(r => r.id !== recordId && r.user === user && r.date === dateKey && !r.deleted_at);
+        if (dup) { alert(`⚠️ ${user} 在【${dateKey}】已存在记录，不可重复。`); return; }
+
+        const cost = type === '公车' ? 20 : 40;
+
+        // v2.3.0：加班时段
+        const editOvertimeRadio = document.querySelector('input[name="editOvertimeSlot"]:checked');
+        const overtimePeriod = editOvertimeRadio ? editOvertimeRadio.value : null;
+
+        // 生成全新 id（不同于原记录）
+        const newId = crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 9));
+
+        const newRecord = {
+            id: newId,
+            user,
+            time: timeStr,
+            village: villages,
+            type,
+            cost,
+            work,
+            date: dateKey,
+            overtime_period: overtimePeriod,
+            exported: false,
+            deleted_at: null,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+        };
+
+        const list = [...allRecords, newRecord];
+        await saveAllData(list, undefined);
+
+        closeEditModal();
+        selectedDateStr = dateKey;
+        renderAll();
+        showToast('✅ 已存为新记录');
+        lastActivityTime = Date.now();
+    }
+
+    window.saveAsNewRecord = saveAsNewRecord;
+
     document.getElementById('editModal')?.addEventListener('click', function(e) { if (e.target === this)
 
             closeEditModal(); });
@@ -8602,12 +8695,14 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
             const ws = workbook.addWorksheet('下乡记录明细');
 
-            // 列：日期、姓名、村委、出行方式、工作内容、打卡时间
+            // 列：日期、姓名、村委、出行方式、费用、工作内容、打卡时间
+            // v2.3.0：新增「费用」列，与表格显示一致，方便对账
             ws.columns = [
                 { header: '日期', key: 'date', width: 13 },
                 { header: '姓名', key: 'user', width: 11 },
                 { header: '村委', key: 'village', width: 26 },
                 { header: '出行方式', key: 'type', width: 10 },
+                { header: '费用', key: 'cost', width: 8 },
                 { header: '工作内容', key: 'work', width: 30 },
                 { header: '打卡时间', key: 'time', width: 19 }
             ];
@@ -8621,6 +8716,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
                     user: r.user || '',
                     village: r.village || '',
                     type: r.type || '',
+                    cost: (r.cost || 0) + '元',
                     work: r.work || '',
                     time: r.time || ''
                 });
