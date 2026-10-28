@@ -2288,6 +2288,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             <!-- v2.3.2 新增：关键字搜索（村委/工作内容模糊匹配） -->
             <div class="filter-group"><label>🔍</label><input type="text" id="filterKeyword" placeholder="村委/内容" oninput="applyFilter()" style="width:120px;padding:5px 8px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;" /></div>
             <button class="btn btn-sm btn-primary" onclick="applyFilter()">筛选</button>
+            <span id="filterCountBadge" style="align-self:center;font-size:12px;color:#047857;background:#d1fae5;border:1px solid #86efac;border-radius:10px;padding:2px 10px;display:none;"></span>
             <button class="btn btn-sm btn-outline" onclick="resetFilter()">重置</button>
         </div>
         <div class="table-wrap">
@@ -6920,6 +6921,17 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
         filtered.sort((a, b) => new Date(b.time) - new Date(a.time));
 
+        // 延续优化：筛选激活时显示结果计数
+        const _cntBadge = document.getElementById('filterCountBadge');
+        if (_cntBadge) {
+            if (fUsers.length || fMonth || fWork || fKeyword || filtered.length !== list.length) {
+                _cntBadge.textContent = `共 ${filtered.length} 条`;
+                _cntBadge.style.display = 'inline-block';
+            } else {
+                _cntBadge.style.display = 'none';
+            }
+        }
+
         const tbody = document.getElementById('tableBody');
 
         selectedIds.clear();
@@ -8725,7 +8737,9 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
             const monthPart = fMonth ? fMonth : '全部月份';
 
-            a.download = `下乡记录明细_${monthPart}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+            // 延续优化：搜索关键字激活时文件名带上筛选条件
+            const _kwPart = _fKeyword ? `_搜${_fKeyword}` : '';
+            a.download = `下乡记录明细_${monthPart}${_kwPart}_${new Date().toISOString().slice(0, 10)}.xlsx`;
 
             a.href = url;
 
