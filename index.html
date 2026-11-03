@@ -2182,6 +2182,30 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             display: inline-block;
             border-radius: 3px;
         }
+
+        /* PC 端（≥769px）：实色块更饱满，与深绿主题协调；移动端保持淡色不变 */
+        @media (min-width: 769px) {
+            .calendar-cell.has-record[class*="wt-"]:not(.festival) {
+                background: var(--wt-bar);
+                color: #fff;
+                border-left: none;
+                box-shadow: 0 3px 10px rgba(15, 23, 42, 0.20);
+            }
+            .calendar-cell.has-record[class*="wt-"] .day-count {
+                color: #fff;
+                opacity: 0.95;
+            }
+            .calendar-cell.has-record[class*="wt-"] .cal-work-icon {
+                filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+            }
+            .calendar-cell.has-record[class*="wt-"] .cal-type-bars i {
+                box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
+            }
+            .calendar-cell.has-record[class*="wt-"].today:not(.festival) {
+                outline: 2px solid #fbbf24;
+                outline-offset: -3px;
+            }
+        }
     </style>
 </head>
 <body>
