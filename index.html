@@ -3811,18 +3811,12 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
         }
 
-        // v2.1.9：登录成功后触发版本日志检测（visitor 不弹）
+        // v2.4.1：登录后提醒统一排队——更新日志优先，关闭后再弹节日/周末提醒，避免两个弹窗叠加
         setTimeout(function() {
 
-            checkVersionLogOnLoad();
+            runPostLoginReminders();
 
         }, 600);
-
-        setTimeout(function() {
-
-            checkHolidayReminder();
-
-        }, 300);
 
     }
 
@@ -10545,6 +10539,17 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
     function checkHolidayReminder() {
 
+        // v2.4.1：更新日志弹窗还开着时不要抢屏，等它关闭后再弹
+        const _versionModal = document.getElementById('versionLogModal');
+
+        if (_versionModal && _versionModal.classList.contains('active')) {
+
+            scheduleHolidayReminder(1500);
+
+            return;
+
+        }
+
         const holidayEntries = Object.entries(HOLIDAY_CONFIG)
 
             .filter(([date, info]) => info.type === 'holiday')
@@ -11479,12 +11484,70 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
         }
 
+        // v2.4.1：更新日志关闭后，再补弹被推迟的节日/周末提醒
+        if (_versionLogBlocksReminder) {
+
+            _versionLogBlocksReminder = false;
+
+            scheduleHolidayReminder(700);
+
+        }
+
     }
 
     /**
      * 登录成功后检测是否需要弹出版本更新日志（v2.1.9：由 setAuthStatus 触发，不再页面加载即弹）
      * 逻辑：未登录（visitor）不弹；localStorage 已读版本 != 当前版本 → 延迟弹出
      */
+    // v2.4.1：登录后提醒排队，避免「更新日志」与「周末/节假日」弹窗叠加
+    let _versionLogBlocksReminder = false;
+
+    let _holidayReminderTimer = null;
+
+    function scheduleHolidayReminder(delay) {
+
+        if (_holidayReminderTimer) return;
+
+        _holidayReminderTimer = setTimeout(function() {
+
+            _holidayReminderTimer = null;
+
+            checkHolidayReminder();
+
+        }, delay);
+
+    }
+
+    function runPostLoginReminders() {
+
+        let needVersionLog = false;
+
+        try {
+
+            const auth = (typeof getAuthStatus === 'function') ? getAuthStatus() : null;
+
+            const currentVersion = getCurrentVersionFromPage();
+
+            const lastRead = localStorage.getItem(VERSION_LOG_STORAGE_KEY);
+
+            needVersionLog = !!(auth && auth.role && auth.role !== 'visitor' && currentVersion && lastRead !== currentVersion);
+
+        } catch (e) { /* localStorage 不可用时按无更新处理 */ }
+
+        if (needVersionLog) {
+
+            _versionLogBlocksReminder = true;
+
+            checkVersionLogOnLoad();
+
+        } else {
+
+            scheduleHolidayReminder(900);
+
+        }
+
+    }
+
     function checkVersionLogOnLoad() {
 
         try {
