@@ -2208,23 +2208,45 @@ https://github.com/nodeca/pako/blob/main/LICENSE
         }
         /* ===== v2.4.0：手机端记录列表改卡片式 ===== */
         @media (max-width: 768px) {
+            .table-wrap { overflow-x: hidden !important; padding: 0 !important; }
+            #recordTable { min-width: 0 !important; width: 100% !important; table-layout: fixed; border: none !important; }
             #recordTable thead { display: none; }
-            #recordTable, #recordTable tbody, #recordTable tr, #recordTable td { display: block; width: 100%; box-sizing: border-box; }
+            #recordTable tbody, #recordTable tr, #recordTable td { display: block; width: 100%; box-sizing: border-box; }
             #recordTable tr {
                 background: #fff;
                 border: 1px solid #e2e8f0;
                 border-left: 4px solid #10b981;
                 border-radius: 10px;
-                padding: 8px 12px;
-                margin-bottom: 10px;
+                padding: 8px 10px;
+                margin-bottom: 8px;
                 box-shadow: 0 1px 4px rgba(15, 23, 42, 0.07);
             }
             #recordTable tr.table-empty { border-left-color: #e2e8f0; text-align: center; color: #94a3b8; }
-            #recordTable td { border: none !important; padding: 4px 0 !important; display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: right !important; }
-            #recordTable td::before { content: attr(data-label); flex: 0 0 auto; color: #64748b; font-size: 12px; font-weight: 500; }
-            #recordTable td.td-checkbox, #recordTable td.td-actions { justify-content: flex-end; }
+            #recordTable td {
+                border: none !important;
+                padding: 2px 0 !important;
+                display: grid;
+                grid-template-columns: 44px 1fr;
+                align-items: start;
+                gap: 6px;
+                text-align: left !important;
+                font-size: 13px;
+                line-height: 1.5;
+                word-break: break-all;
+            }
+            #recordTable td::before { content: attr(data-label); color: #94a3b8; font-size: 12px; font-weight: 500; }
+            /* 序号在大卡片里没意义，隐藏省一行 */
+            #recordTable td[data-label="序号"] { display: none; }
+            #recordTable td.td-checkbox { display: flex; justify-content: flex-end; padding-bottom: 4px !important; }
             #recordTable td.td-checkbox::before, #recordTable td.td-actions::before { content: ''; }
-            #recordTable td.td-actions { padding-top: 8px !important; border-top: 1px dashed #e2e8f0 !important; margin-top: 4px; }
+            #recordTable td.td-actions {
+                display: flex;
+                justify-content: flex-end;
+                gap: 8px;
+                padding-top: 6px !important;
+                border-top: 1px dashed #e2e8f0 !important;
+                margin-top: 4px;
+            }
         }
     </style>
 </head>
@@ -2781,7 +2803,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
                 "items": [
                     { "type": "新增", "scope": "all", "desc": "报账单按村委拆分导出：导出弹窗勾选「按村委拆分导出」，程序按该月实际涉及的村委逐个生成报账单，文件名自动带村委名，一次导完所有村的账" },
                     { "type": "新增", "scope": "all", "desc": "打卡记录一键生成图片：记录区新增「🖼️ 生成图片」按钮，把当前筛选结果（最多 40 条）生成带院名、筛选条件、合计费用的图片，可直接发微信群" },
-                    { "type": "优化", "scope": "all", "desc": "手机端记录列表改卡片式：每条记录显示为一张卡片，字段带名称标签，不用再左右拖动表格；电脑端保持原表格样式" }
+                    { "type": "优化", "scope": "all", "desc": "手机端记录列表改卡片式：每条记录一张卡片，字段名与内容紧挨显示、不再左右拉得很开，同时去掉横向滚动，手机上一屏看全一条记录；电脑端保持原表格" }
                 ]
             },
             {
