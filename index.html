@@ -2211,42 +2211,68 @@ https://github.com/nodeca/pako/blob/main/LICENSE
             .table-wrap { overflow-x: hidden !important; padding: 0 !important; }
             #recordTable { min-width: 0 !important; width: 100% !important; table-layout: fixed; border: none !important; }
             #recordTable thead { display: none; }
-            #recordTable tbody, #recordTable tr, #recordTable td { display: block; width: 100%; box-sizing: border-box; }
+            #recordTable tbody { display: block; }
             #recordTable tr {
+                display: grid;
+                grid-template-columns: auto minmax(0, 1fr) auto auto;
+                grid-template-areas:
+                    "chk user user time"
+                    "vil vil type cost"
+                    "work work work status"
+                    "act act act act";
+                gap: 2px 8px;
+                align-items: center;
                 background: #fff;
                 border: 1px solid #e2e8f0;
-                border-left: 4px solid #10b981;
-                border-radius: 10px;
-                padding: 8px 10px;
-                margin-bottom: 8px;
-                box-shadow: 0 1px 4px rgba(15, 23, 42, 0.07);
+                border-left: 3px solid #10b981;
+                border-radius: 8px;
+                padding: 6px 10px;
+                margin-bottom: 6px;
+                box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+                box-sizing: border-box;
             }
-            #recordTable tr.table-empty { border-left-color: #e2e8f0; text-align: center; color: #94a3b8; }
+            #recordTable tr.table-empty {
+                display: block !important;
+                border-left-color: #e2e8f0;
+                text-align: center;
+                color: #94a3b8;
+                padding: 16px 10px;
+            }
             #recordTable td {
                 border: none !important;
-                padding: 2px 0 !important;
-                display: grid;
-                grid-template-columns: 44px 1fr;
-                align-items: start;
-                gap: 6px;
+                padding: 0 !important;
+                display: block;
+                min-width: 0;
                 text-align: left !important;
                 font-size: 13px;
-                line-height: 1.5;
-                word-break: break-all;
+                line-height: 1.4;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
-            #recordTable td::before { content: attr(data-label); color: #94a3b8; font-size: 12px; font-weight: 500; }
-            /* 序号在大卡片里没意义，隐藏省一行 */
+            #recordTable td::before { content: none !important; }
             #recordTable td[data-label="序号"] { display: none; }
-            #recordTable td.td-checkbox { display: flex; justify-content: flex-end; padding-bottom: 4px !important; }
-            #recordTable td.td-checkbox::before, #recordTable td.td-actions::before { content: ''; }
+            #recordTable td[data-label="人员"] { grid-area: user; font-size: 14px; color: #0f172a; }
+            #recordTable td[data-label="人员"] strong { font-weight: 600; }
+            #recordTable td[data-label="时间"] { grid-area: time; font-size: 12px; color: #94a3b8; text-align: right !important; }
+            #recordTable td[data-label="村委"] { grid-area: vil; font-size: 13px; color: #334155; }
+            #recordTable td[data-label="出行"] { grid-area: type; font-size: 12px; color: #94a3b8; text-align: right !important; }
+            #recordTable td[data-label="费用"] { grid-area: cost; font-size: 13px; color: #059669; font-weight: 600; text-align: right !important; }
+            #recordTable td[data-label="内容"] { grid-area: work; font-size: 12px !important; color: #64748b; text-align: left !important; }
+            #recordTable td[data-label="状态"] { grid-area: status; font-size: 11px; text-align: right !important; }
+            #recordTable td[data-label="状态"] span { font-size: 11px; padding: 1px 5px; }
+            #recordTable td.td-checkbox { grid-area: chk; display: flex; justify-content: flex-start; align-items: center; }
+            #recordTable td.td-checkbox input { margin: 0; }
             #recordTable td.td-actions {
+                grid-area: act;
                 display: flex;
                 justify-content: flex-end;
-                gap: 8px;
-                padding-top: 6px !important;
-                border-top: 1px dashed #e2e8f0 !important;
-                margin-top: 4px;
+                gap: 6px;
+                padding-top: 4px !important;
+                margin-top: 2px;
+                border-top: 1px dashed #eef2f7 !important;
             }
+            #recordTable td.td-actions .btn { padding: 2px 8px !important; font-size: 12px !important; line-height: 1.5; }
         }
     </style>
 </head>
@@ -2803,7 +2829,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
                 "items": [
                     { "type": "新增", "scope": "all", "desc": "报账单按村委拆分导出：导出弹窗勾选「按村委拆分导出」，程序按该月实际涉及的村委逐个生成报账单，文件名自动带村委名，一次导完所有村的账" },
                     { "type": "新增", "scope": "all", "desc": "打卡记录一键生成图片：记录区新增「🖼️ 生成图片」按钮，把当前筛选结果（最多 40 条）生成带院名、筛选条件、合计费用的图片，可直接发微信群" },
-                    { "type": "优化", "scope": "all", "desc": "手机端记录列表改卡片式：每条记录一张卡片，字段名与内容紧挨显示、不再左右拉得很开，同时去掉横向滚动，手机上一屏看全一条记录；电脑端保持原表格" }
+                    { "type": "优化", "scope": "all", "desc": "手机端记录列表改卡片式：每条记录压缩为四行紧凑卡片（人员与时间 / 村委·出行·费用 / 工作内容·导出状态 / 操作按钮），不再左右拖动，一屏可看更多条；电脑端保持原表格" }
                 ]
             },
             {
